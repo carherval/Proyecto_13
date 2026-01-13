@@ -1,0 +1,24 @@
+.cabecera-home {
+  height: 10rem;
+}
+
+.cabecera-home > h1 {
+  padding: 2rem;
+  font-size: 3.5rem;
+}
+
+.cabecera-home > img {
+  width: var(--header-img-width);
+}
+
+.cabecera {
+  height: 10rem;
+  padding: 0 2rem 0;
+  background-color: var(--black-color);
+  /* Estilos responsive */
+  flex-direction: column;
+}
+
+.cabecera > h1 > a {
+  color: var(--white-color);
+}

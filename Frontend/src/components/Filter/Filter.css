@@ -1,0 +1,182 @@
+.filter {
+  width: var(--list-width);
+}
+
+.filter > div {
+  border-left: var(--yellow-border);
+  border-right: var(--yellow-border);
+  border-bottom: var(--yellow-border);
+  padding: 2rem;
+}
+
+.filter form {
+  /* Estilos responsive */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter form > fieldset {
+  width: 100%;
+  /* Estilos responsive */
+  gap: 1rem;
+}
+
+.filter form > fieldset > div {
+  width: 100%;
+  /* Estilos responsive */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter form span {
+  font-weight: bold;
+}
+
+/* Campo de texto */
+
+.filter .txt-fld {
+  border: var(--yellow-border);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  color: var(--yellow-color);
+}
+
+/* Botón de opción */
+
+.filter .rd-btn {
+  display: none;
+}
+
+.filter .rd-btn + label {
+  border: var(--yellow-border);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.filter .rd-btn:checked + label {
+  font-weight: bold;
+  color: var(--orange-color);
+  background-color: var(--yellow-color);
+}
+
+/* Diseño responsive */
+
+@media screen and (max-width: 425px) {
+  .filter .txt-fld {
+    width: 85%;
+  }
+
+  .filter form > fieldset:nth-child(2) .rd-btn + label,
+  .filter form > fieldset:nth-child(3) .rd-btn + label,
+  .filter form > fieldset:nth-child(5) .rd-btn + label {
+    width: 20%;
+  }
+
+  .filter form > fieldset:nth-child(4) .rd-btn + label {
+    width: 18%;
+  }
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px) {
+  .filter form > fieldset:nth-child(1),
+  .filter form > fieldset:nth-child(2) {
+    width: 49%;
+  }
+
+  .filter .txt-fld {
+    width: 75%;
+  }
+
+  .filter form > fieldset:nth-child(2) .rd-btn + label {
+    width: 15%;
+  }
+
+  .filter form > fieldset:nth-child(3) .rd-btn + label {
+    width: 20%;
+  }
+
+  .filter form > fieldset:nth-child(4) .rd-btn + label {
+    width: 18%;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .filter form > fieldset:nth-child(1),
+  .filter form > fieldset:nth-child(2) {
+    width: 49%;
+  }
+
+  .filter .txt-fld {
+    width: 80%;
+  }
+
+  .filter form > fieldset:nth-child(2) .rd-btn + label,
+  .filter form > fieldset:nth-child(3) .rd-btn + label {
+    width: 20%;
+  }
+
+  .filter form > fieldset:nth-child(4) .rd-btn + label {
+    width: 19%;
+  }
+
+  .filter form > fieldset:nth-child(5) .rd-btn + label {
+    width: 10.5%;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 2559px) {
+  .filter form > fieldset:nth-child(1) {
+    width: 23%;
+  }
+
+  .filter form > fieldset:nth-child(2),
+  .filter form > fieldset:nth-child(3) {
+    width: 37%;
+  }
+
+  .filter form > fieldset:nth-child(2) .rd-btn + label {
+    width: 20%;
+  }
+
+  .filter form > fieldset:nth-child(3) .rd-btn + label {
+    width: 19%;
+  }
+
+  .filter form > fieldset:nth-child(4) .rd-btn + label {
+    width: 9%;
+  }
+
+  .filter form > fieldset:nth-child(5) .rd-btn + label {
+    width: 10.5%;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .filter form > fieldset:nth-child(1) {
+    width: 30%;
+  }
+
+  .filter form > fieldset:nth-child(2),
+  .filter form > fieldset:nth-child(3) {
+    width: 34%;
+  }
+
+  .filter .txt-fld {
+    width: 79%;
+  }
+
+  .filter form > fieldset:nth-child(2) .rd-btn + label {
+    width: 19%;
+  }
+
+  .filter form > fieldset:nth-child(4) .rd-btn + label {
+    width: 9.5%;
+  }
+
+  .filter form > fieldset:nth-child(5) .rd-btn + label {
+    width: 10.5%;
+  }
+}
