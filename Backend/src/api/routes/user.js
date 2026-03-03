@@ -1,9 +1,10 @@
-const userRouter = require('express').Router()
+const express = require('express')
 const { userController } = require('../controllers/user')
-const { isAuthorizedUser } = require('../../middlewares/auth')
-const { isValidSize } = require('../../middlewares/file')
-const { uploadUser, uploadNoAvatarUser } = require('../../middlewares/user')
 const { ROLES } = require('../models/user')
+const { isAuthorizedUser } = require('../../middlewares/auth')
+const { uploadUser } = require('../../middlewares/upload')
+
+const userRouter = express.Router()
 
 userRouter.get(
   '/get/all/',
@@ -13,20 +14,19 @@ userRouter.get(
 
 userRouter.get('/get/id/:id', isAuthorizedUser(), userController.getUserById)
 
-userRouter.post('/login/', uploadNoAvatarUser, userController.loginUser)
+userRouter.post('/login/', uploadUser(), userController.loginUser)
 
 userRouter.post(
   '/create/',
-  isAuthorizedUser({ isRequiredLogin: false }),
-  isValidSize,
-  uploadUser,
+  isAuthorizedUser({ role: ROLES.admin }),
+  uploadUser(),
   userController.createUser
 )
 
 userRouter.put(
   '/update/id/:id',
   isAuthorizedUser(),
-  uploadUser,
+  uploadUser(),
   userController.updateUserById
 )
 

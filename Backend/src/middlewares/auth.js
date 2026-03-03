@@ -1,9 +1,11 @@
-const { ROLES } = require('../api/models/user')
+const { ROLES, User } = require('../api/models/user')
+const { helpers } = require('../utils/helpers')
+const { getDecodedToken } = require('../utils/token')
 const { validation } = require('../utils/validation')
 
-// También devuelve el usuario autorizado cuando se realiza un inicio de sesión aunque no sea requerido por el "endpoint"
+// También devuelve el usuario autorizado cuando se realiza un inicio de sesión aunque no sea obligatorio
 const isAuthorizedUser =
-  ({ isRequiredLogin = true, role = ROLES.user } = {}) =>
+  ({ isRequiredLogin = true, role = ROLES.seller } = {}) =>
   async (req, res, next) => {
     try {
       const token = req.headers.authorization?.split(' ')[1]
@@ -11,9 +13,6 @@ const isAuthorizedUser =
       if (token == null && isRequiredLogin) {
         throw new Error(validation.getLoginMsg())
       }
-
-      const { User } = require('../api/models/user')
-      const { getDecodedToken } = require('../utils/token')
 
       req.user =
         token != null ? await User.findById(getDecodedToken(token).id) : null
@@ -24,15 +23,15 @@ const isAuthorizedUser =
         throw new Error(validation.getLoginMsg())
       }
 
-      if (req.user.role !== role && req.user.role === ROLES.user) {
+      if (req.user.role !== role && req.user.role === ROLES.seller) {
         throw new Error(validation.getLoginMsg(ROLES.admin))
       }
 
       return next()
     } catch (error) {
       if (isRequiredLogin) {
-        error.message = `${validation.ENDPOINT_ACCESS_ERROR_MSG}:${validation.LINE_BREAK}${error.message}`
-        error.status = 401
+        error.message = `${validation.ENDPOINT_ACCESS_ERROR_MSG}:${helpers.LINE_BREAK}${error.message}`
+        error.status = 403
 
         return next(error)
       } else {

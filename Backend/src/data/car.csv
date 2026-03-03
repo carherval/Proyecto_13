@@ -1,0 +1,101 @@
+licensePlate,make,model,color,img,modelYear,purchaseDate,condition,mileage,price,status
+1234BCD,Hyundai,Tucson,Verde oscuro,,2020,16/01/2021,Nuevo,0,25800,Disponible
+1235BCF,Cadillac,Escalade,Azul,,2018,16/01/2021,Usado,40000,48500,Disponible
+1236BCG,Hyundai,Tucson,Gris,,2020,16/01/2021,Nuevo,0,25800,Disponible
+1237BCH,Toyota,Sienna,Mostaza,,2014,02/02/2021,Usado,70000,19500,Disponible
+1238BCJ,Toyota,Sienna,Negro,,2014,02/02/2021,Usado,70000,19500,Disponible
+1239BCK,GMC,Terrain,Turquesa,,2016,21/03/2021,Usado,60000,21700,Disponible
+1240BCL,GMC,Terrain,Blanco,,2016,21/03/2021,Usado,60000,21700,Disponible
+1241BCM,Honda,Accord,Marrón,,2015,09/04/2021,Usado,50000,18200,Disponible
+1242BCN,Honda,Accord,Azul metálico,,2015,09/04/2021,Usado,50000,18200,Disponible
+1243BCP,Chevrolet,Traverse,Rojo,,2013,27/05/2021,Usado,80000,16500,Disponible
+1244BCQ,Chevrolet,Traverse,Oliva,,2013,27/05/2021,Usado,80000,16500,Disponible
+1245BCR,Ford,Escape,Gris oscuro,,2014,14/06/2021,Usado,40000,14700,Disponible
+1246BCS,Ford,Escape,Violeta,,2014,14/06/2021,Usado,40000,14700,Disponible
+1247BCT,Hyundai,Elantra,Plateado,,2018,03/07/2021,Usado,55000,16000,Disponible
+1248BCV,Hyundai,Elantra,Amarillo,,2018,03/07/2021,Usado,55000,16000,Disponible
+1249BCW,Hyundai,Elantra,Granate,,2018,03/07/2021,Usado,55000,16000,Disponible
+1250BCX,Honda,CR-V,Verde,,2016,19/08/2021,Usado,45000,19300,Disponible
+1251BCY,Jeep,Cherokee,Azul oscuro,,2015,05/09/2021,Usado,30000,17800,Disponible
+1252BCZ,Honda,Accord,Dorado,,2009,23/10/2021,Usado,90000,8900,Disponible
+1253BDB,Toyota,RAV4,Morado,,2011,11/11/2021,Usado,70000,12500,Disponible
+1254BDC,Ford,Explorer,Naranja,,2003,30/12/2021,Usado,85000,6800,Disponible
+1255BDD,BMW,5 Series,Gris azulado,,2018,16/01/2022,Usado,25000,32000,Disponible
+1256BDF,BMW,5 Series,Marrón oscuro,,2018,16/01/2022,Usado,25000,32000,Disponible
+1257BDG,Lincoln,MKC,Blanco,,2015,02/02/2022,Usado,65000,18200,Disponible
+1258BDH,Lincoln,MKC,Negro,,2015,02/02/2022,Usado,65000,18200,Disponible
+1259BDJ,Ford,Focus,Azul,,2017,21/03/2022,Usado,30000,12300,Disponible
+1260BDK,Ford,Focus,Verde,,2017,21/03/2022,Usado,30000,12300,Disponible
+1261BDL,Chevrolet,Equinox,Rojo,,2020,09/04/2022,Nuevo,0,27500,Disponible
+1262BDM,Chevrolet,Equinox,Gris,,2020,09/04/2022,Nuevo,0,27500,Disponible
+1263BDN,Audi,Q5,Turquesa,,2014,27/05/2022,Usado,55000,21000,Disponible
+1264BDP,Audi,Q5,Mostaza,,2014,27/05/2022,Usado,55000,21000,Disponible
+1265BDQ,Toyota,4Runner,Azul metálico,,2016,14/06/2022,Usado,40000,29500,Disponible
+1266BDR,Toyota,4Runner,Oliva,,2016,14/06/2022,Usado,40000,29500,Disponible
+1267BDS,Honda,Accord,Plateado,,2014,03/07/2022,Usado,70000,15800,Disponible
+1268BDT,Honda,Accord,Violeta,,2014,03/07/2022,Usado,70000,15800,Disponible
+1269BDV,Honda,HR-V,Gris oscuro,,2016,19/08/2022,Usado,45000,17000,Disponible
+1270BDW,Honda,HR-V,Dorado,,2016,19/08/2022,Usado,45000,17000,Disponible
+1271BDX,Ram,2500,Marrón,,2010,05/09/2022,Usado,80000,24000,Disponible
+1272BDY,Ram,2500,Verde oscuro,,2010,05/09/2022,Usado,80000,24000,Disponible
+1273BDZ,Acura,RDX,Blanco,,2012,23/10/2022,Usado,60000,19500,Disponible
+1274BFB,Acura,RDX,Granate,,2012,23/10/2022,Usado,60000,19500,Disponible
+1275BFC,Ford,Shelby GT500,Morado,,2014,11/11/2022,Usado,25000,41000,Disponible
+1276BFD,Ford,Shelby GT500,Azul oscuro,,2014,11/11/2022,Usado,25000,41000,Disponible
+1277BFF,Toyota,Highlander,Naranja,,2012,30/12/2022,Usado,70000,20700,Disponible
+1278BFG,Toyota,Highlander,Negro,,2012,30/12/2022,Usado,70000,20700,Disponible
+1279BFH,GMC,Terrain,Gris azulado,,2014,16/01/2023,Usado,55000,18000,Disponible
+1280BFJ,GMC,Terrain,Rojo,,2014,16/01/2023,Usado,55000,18000,Disponible
+1281BFK,Honda,Civic,Amarillo,,2014,02/02/2023,Usado,35000,14200,Disponible
+1282BFL,Honda,Civic,Verde,,2014,02/02/2023,Usado,35000,14200,Disponible
+1283BFM,Lincoln,MKZ,Turquesa,,2014,21/03/2023,Usado,40000,16500,Disponible
+1284BFN,Lincoln,MKZ,Plateado,,2014,21/03/2023,Usado,40000,16500,Disponible
+1285BFP,Nissan,Rogue,Azul,,2015,09/04/2023,Usado,50000,18900,Disponible
+1286BFQ,Nissan,Rogue,Mostaza,,2015,09/04/2023,Usado,50000,18900,Disponible
+1287BFR,GMC,Yukon,Marrón oscuro,,2016,27/05/2023,Usado,65000,33500,Disponible
+1288BFS,GMC,Yukon,Gris,,2016,27/05/2023,Usado,65000,33500,Disponible
+1289BFT,Dodge,Challenger,Dorado,,2012,14/06/2023,Usado,80000,23000,Disponible
+1290BFV,Dodge,Challenger,Violeta,,2012,14/06/2023,Usado,80000,23000,Disponible
+1291BFW,Toyota,Prius,Oliva,,2018,03/07/2023,Usado,30000,17800,Disponible
+1292BFX,Toyota,Prius,Negro,,2018,03/07/2023,Usado,30000,17800,Disponible
+1293BFY,Acura,MDX,Azul metálico,,2016,12/08/2023,Usado,55000,22500,Disponible
+1294BFZ,Hyundai,Santa Fe,Blanco,,2016,19/08/2023,Usado,55000,20500,Disponible
+1295BGB,Hyundai,Santa Fe,Verde oscuro,,2016,19/08/2023,Usado,55000,20500,Disponible
+1296BGC,Hyundai,Elantra,Granate,,2019,02/09/2023,Usado,30000,13200,Disponible
+1297BGD,Ford,F-150,Morado,,2014,05/09/2023,Usado,45000,27000,Disponible
+1298BGF,Ford,F-150,Rojo,,2014,05/09/2023,Usado,45000,27000,Disponible
+1299BGG,Ford,Mustang,Turquesa,,2003,17/10/2023,Usado,90000,8500,Disponible
+1300BGH,Toyota,Highlander,Gris oscuro,,2015,23/10/2023,Usado,40000,23500,Disponible
+1301BGJ,Toyota,Highlander,Amarillo,,2015,23/10/2023,Usado,40000,23500,Disponible
+1302BGK,Mercedes,S-Class,Azul oscuro,,2014,05/11/2023,Usado,70000,30000,Disponible
+1303BGL,Mercedes,S-Class,Plateado,,2014,05/11/2023,Usado,70000,30000,Disponible
+1304BGM,Chevrolet,Malibu,Marrón,,2016,11/11/2023,Usado,35000,16900,Disponible
+1305BGN,Chevrolet,Malibu,Verde,,2016,11/11/2023,Usado,35000,16900,Disponible
+1306BGP,Dodge,Charger,Dorado,,2020,20/12/2023,Nuevo,0,32800,Disponible
+1307BGQ,Dodge,Charger,Naranja,,2020,20/12/2023,Nuevo,0,32800,Disponible
+1308BGR,Honda,CR-V,Negro,,2017,30/12/2023,Usado,25000,22300,Disponible
+1309BGS,Honda,CR-V,Gris azulado,,2017,30/12/2023,Usado,25000,22300,Disponible
+1310BGT,Jeep,Grand Cherokee,Mostaza,,2016,08/01/2024,Usado,50000,19800,Disponible
+1311BGV,Jeep,Grand Cherokee,Violeta,,2016,08/01/2024,Usado,50000,19800,Disponible
+1312BGW,Nissan,Rogue,Blanco,,2021,14/02/2024,Nuevo,0,26000,Disponible
+1313BGX,Nissan,Rogue,Oliva,,2021,14/02/2024,Nuevo,0,26000,Disponible
+1314BGY,Honda,Civic,Azul,,2012,03/03/2024,Usado,80000,11000,Disponible
+1315BGZ,Honda,Civic,Rojo,,2012,03/03/2024,Usado,80000,11000,Disponible
+1316BHB,Chevrolet,Suburban,Morado,,2014,21/04/2024,Usado,60000,28500,Disponible
+1317BHC,Chevrolet,Suburban,Verde oscuro,,2014,21/04/2024,Usado,60000,28500,Disponible
+1318BHD,Volvo,S60,Plateado,,2018,09/05/2024,Usado,40000,17900,Disponible
+1319BHF,Volvo,S60,Gris,,2018,09/05/2024,Usado,40000,17900,Disponible
+1320BHG,Tesla,Model S,Granate,,2020,18/06/2024,Nuevo,0,75000,Disponible
+1321BHH,Tesla,Model S,Azul metálico,,2020,18/06/2024,Nuevo,0,75000,Disponible
+1322BHJ,GMC,Acadia,Turquesa,,2016,02/07/2024,Usado,45000,23800,Disponible
+1323BHK,GMC,Acadia,Dorado,,2016,02/07/2024,Usado,45000,23800,Disponible
+1324BHL,Honda,CR-V,Negro,,2017,15/08/2024,Usado,35000,21200,Disponible
+1325BHM,Honda,CR-V,Plateado,,2017,15/08/2024,Usado,35000,21200,Disponible
+1326BHN,Lincoln,Town Car,Amarillo,,2005,04/09/2024,Usado,85000,10500,Disponible
+1327BHP,Lincoln,Town Car,Granate,,2005,04/09/2024,Usado,85000,10500,Disponible
+1328BHQ,Ram,1500,Verde,,2013,23/10/2024,Usado,75000,19000,Disponible
+1329BHR,Ram,1500,Azul oscuro,,2013,23/10/2024,Usado,75000,19000,Disponible
+1330BHS,Fiat,500,Dorado,,2017,11/11/2024,Usado,20000,14500,Disponible
+1331BHT,Fiat,500,Naranja,,2017,11/11/2024,Usado,20000,14500,Disponible
+1332BHV,Mazda,CX-5,Gris azulado,,2015,30/12/2024,Usado,50000,16700,Disponible
+1333BHW,Mazda,CX-5,Marrón oscuro,,2015,30/12/2024,Usado,50000,16700,Disponible

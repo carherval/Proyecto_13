@@ -1,9 +1,10 @@
-const USER_COLLECTION_NAME = 'user'
-
 const mongoose = require('mongoose')
+const { helpers } = require('../../utils/helpers')
 const { validation } = require('../../utils/validation')
 
-const ROLES = { user: 'user', admin: 'admin', superadmin: 'superadmin' }
+const USER_COLLECTION_NAME = 'user'
+
+const ROLES = { seller: 'seller', admin: 'admin', superadmin: 'superadmin' }
 const { superadmin, ...ALLOWED_ROLES } = ROLES
 
 const userSchema = new mongoose.Schema(
@@ -11,36 +12,32 @@ const userSchema = new mongoose.Schema(
     surnames: {
       type: String,
       trim: true,
-      required: [true, validation.MANDATORY_MSG]
+      required: [true, validation.REQUIRED_MSG]
     },
     name: {
       type: String,
       trim: true,
-      required: [true, validation.MANDATORY_MSG]
+      required: [true, validation.REQUIRED_MSG]
     },
     username: {
       type: String,
       trim: true,
-      required: [true, validation.MANDATORY_MSG],
+      lowercase: true,
+      required: [true, validation.REQUIRED_MSG],
       unique: [true, `username: ${validation.UNIQUE_MSG}`]
-    },
-    avatar: {
-      type: String,
-      trim: true,
-      default: ''
     },
     password: {
       type: String,
       trim: true,
-      required: [true, validation.MANDATORY_MSG],
+      required: [true, validation.REQUIRED_MSG],
       select: false
     },
     email: {
       type: String,
       trim: true,
-      required: [true, validation.MANDATORY_MSG],
+      required: [true, validation.REQUIRED_MSG],
       validate: {
-        validator: validation.isEmail,
+        validator: validation.isValidEmail,
         message: validation.INVALID_EMAIL_MSG
       },
       unique: [true, `email: ${validation.UNIQUE_MSG}`]
@@ -48,14 +45,11 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       trim: true,
-      required: [true, validation.MANDATORY_MSG],
+      required: [true, validation.REQUIRED_MSG],
       enum: {
         values: Object.values(ALLOWED_ROLES),
-        message: `${
-          validation.ALLOWED_VALUES_MSG
-        }: ${validation.getObjectValues(ALLOWED_ROLES)}`
-      },
-      default: ROLES.user
+        message: validation.NOT_ALLOWED_VALUE_MSG
+      }
     }
   },
   {
@@ -63,35 +57,22 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-userSchema.index(
-  { avatar: 1 },
-  {
-    unique: true,
-    partialFilterExpression: {
-      // La restricción sólo salta cuando el campo no está vacío y está repetido
-      $and: [{ avatar: { $type: 'string' } }, { avatar: { $gt: '' } }]
-    }
-  }
-)
-
-userSchema.pre('validate', function (next) {
+userSchema.pre('validate', function () {
   if (this.surnames != null) {
-    this.surnames = validation.normalizeString(this.surnames)
+    this.surnames = helpers.normalizeString(this.surnames)
   }
 
   if (this.name != null) {
-    this.name = validation.normalizeString(this.name)
+    this.name = helpers.normalizeString(this.name)
   }
 
   if (this.username != null) {
-    this.username = validation.normalizeUserName(this.username)
+    this.username = helpers.normalizeUserName(this.username)
   }
 
   if (this.role != null) {
-    this.role = validation.normalizeString(this.role)
+    this.role = helpers.normalizeString(this.role)
   }
-
-  return next()
 })
 
 // Modelo, esquema y colección de los usuarios
@@ -102,4 +83,4 @@ const User = mongoose.model(
   USER_COLLECTION_NAME
 )
 
-module.exports = { USER_COLLECTION_NAME, ROLES, User }
+module.exports = { ROLES, User }

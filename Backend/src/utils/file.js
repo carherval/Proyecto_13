@@ -1,13 +1,23 @@
-const cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary')
+const { CloudinaryStorage } = require('multer-storage-cloudinary')
 
-const getPublicIdCloudinary = (pathFile) =>
-  `${pathFile.split('/').at(-3)}/${pathFile.split('/').at(-2)}/${
-    pathFile.split('/').at(-1).split('.')[0]
+const storageConfig = (folderName) =>
+  new CloudinaryStorage({
+    cloudinary: cloudinary.v2,
+    params: {
+      folder: folderName,
+      allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp']
+    }
+  })
+
+const getPublicIdCloudinary = (fileUrl) =>
+  `${fileUrl.split('/').at(-3)}/${fileUrl.split('/').at(-2)}/${
+    fileUrl.split('/').at(-1).split('.')[0]
   }`
 
 const fileExistsInCloudinary = async (publicId) => {
   try {
-    await cloudinary.api.resource(publicId)
+    await cloudinary.v2.api.resource(publicId)
 
     return true
   } catch {
@@ -15,13 +25,13 @@ const fileExistsInCloudinary = async (publicId) => {
   }
 }
 
-const deleteFile = (pathFile, reasonMsg) => {
-  const publicId = getPublicIdCloudinary(pathFile)
+const deleteFile = (fileUrl, reasonMsg) => {
+  const publicId = getPublicIdCloudinary(fileUrl)
 
   // Sólo se elimina si el archivo existe en "cloudinary"
   fileExistsInCloudinary(publicId).then((exists) => {
     if (exists) {
-      cloudinary.uploader.destroy(publicId, () => {
+      cloudinary.v2.uploader.destroy(publicId, () => {
         console.log(
           `Archivo "${publicId}" de "Cloudinary" eliminado debido a: ${reasonMsg}`
         )
@@ -30,4 +40,4 @@ const deleteFile = (pathFile, reasonMsg) => {
   })
 }
 
-module.exports = { getPublicIdCloudinary, fileExistsInCloudinary, deleteFile }
+module.exports = { storageConfig, getPublicIdCloudinary, deleteFile }
