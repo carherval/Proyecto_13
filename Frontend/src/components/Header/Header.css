@@ -1,24 +1,34 @@
-.cabecera-home {
-  height: 10rem;
-}
-
-.cabecera-home > h1 {
-  padding: 2rem;
-  font-size: 3.5rem;
-}
-
-.cabecera-home > img {
-  width: var(--header-img-width);
-}
-
 .cabecera {
-  height: 10rem;
+  height: 15rem;
   padding: 0 2rem 0;
-  background-color: var(--black-color);
+  background-color: var(--background-color);
   /* Estilos responsive */
   flex-direction: column;
 }
 
+.cabecera > h1 a::after {
+  content: '';
+
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+
+  margin-left: 10px;
+
+  background-image: url('/assets/images/loader.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  vertical-align: middle;
+}
+
 .cabecera > h1 > a {
-  color: var(--white-color);
+  color: var(--front-color);
+}
+
+.cabecera > div {
+  width: 100%;
+  /* Estilos responsive */
+  justify-content: space-between;
 }

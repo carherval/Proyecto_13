@@ -1,78 +1,51 @@
-import { useEffect, useReducer } from 'react'
+import { useReducer } from 'react'
 import fetchReducer, { FETCH_ACTION_TYPES } from '../reducers/fetchReducer'
 
 const FETCH_INITIAL_STATE = {
-  data: [],
-  filteredData: [],
-  isLoading: true,
-  isImageLoaded: false,
+  data: null,
+  msg: null,
+  isLoading: false,
   isError: false
 }
 
 // "Custom hook" para las llamadas "fetch"
-const useFetch = (fetchUrl, isCharacterFetch = false) => {
+const useFetch = (fetchCall) => {
   const [fetchState, dispatchFetch] = useReducer(
     fetchReducer,
     FETCH_INITIAL_STATE
   )
 
-  const stateSetters = {
-    setFilteredData: (filteredData) =>
-      dispatchFetch({
-        type: FETCH_ACTION_TYPES.setFilteredData,
-        payload: { filteredData }
-      })
-  }
+  const fetchData = async (...fetchCallParams) => {
+    dispatchFetch({ type: FETCH_ACTION_TYPES.fetchInit })
 
-  const fetchData = async () => {
     try {
-      dispatchFetch({ type: FETCH_ACTION_TYPES.fetchInit })
+      const res = await fetchCall(...fetchCallParams)
+      const resData = await res.json()
 
-      const dataJson = await (await fetch(fetchUrl)).json()
+      res.ok
+        ? dispatchFetch({
+            type: FETCH_ACTION_TYPES.fetchOk,
+            payload: { resData }
+          })
+        : dispatchFetch({
+            type: FETCH_ACTION_TYPES.fetchError,
+            payload: { resData }
+          })
 
-      if (!isCharacterFetch) {
-        dispatchFetch({
-          type: FETCH_ACTION_TYPES.sagaCharactersFetchOk,
-          payload: { dataJson }
-        })
-      } else {
-        if (dataJson.id == null) {
-          dispatchFetch({ type: FETCH_ACTION_TYPES.characterNotFound })
-        } else {
-          const apiImg = new Image()
-
-          apiImg.src = dataJson.image
-          apiImg.onload = () =>
-            dispatchFetch({
-              type: FETCH_ACTION_TYPES.characterFetchOk,
-              payload: { dataJson: [dataJson] }
-            })
-          // Si la carga de la imagen da error, se carga una imagen genérica
-          apiImg.onerror = () => {
-            const localImg = new Image()
-
-            localImg.src = '/assets/images/silueta.png'
-            localImg.onload = () => {
-              dataJson.image = localImg.src
-              dispatchFetch({
-                type: FETCH_ACTION_TYPES.characterFetchOk,
-                payload: { dataJson: [dataJson] }
-              })
-            }
-          }
-        }
-      }
+      return { ok: res.ok, status: res.status, resData }
     } catch (error) {
-      dispatchFetch({ type: FETCH_ACTION_TYPES.fetchError })
+      const resData = { msg: error.message }
+
+      dispatchFetch({
+        type: FETCH_ACTION_TYPES.fetchError,
+        payload: { resData }
+      })
+
+      return { ok: false, status: 500, resData }
     }
   }
 
-  // Actualización de la llamada "fetch" al cambiar la URL
-  useEffect(() => {
-    fetchData()
-  }, [fetchUrl])
-
-  return { ...fetchState, ...stateSetters }
+  return { fetchData, ...fetchState }
 }
 
 export default useFetch
