@@ -13,10 +13,7 @@ const getAllSales = async (req, res, next) => {
       .populate('car')
       .populate('customer')
 
-    return res.status(200).json({
-      msg: sales.length === 0 ? 'No se han encontrado ventas' : undefined,
-      data: sales
-    })
+    return res.status(200).json({ data: sales })
   } catch (error) {
     error.message = `Se ha producido un error al consultar las ventas:${helpers.LINE_BREAK}${error.message}`
     error.status = 500
@@ -98,13 +95,7 @@ const getSalesByCustomerId = async (req, res, next) => {
       .populate('car')
       .populate('customer')
 
-    return res.status(200).json({
-      msg:
-        sales.length === 0
-          ? 'No se han encontrado ventas del cliente'
-          : undefined,
-      data: sales
-    })
+    return res.status(200).json({ data: sales })
   } catch (error) {
     error.message = `Se ha producido un error al consultar las ventas del cliente:${helpers.LINE_BREAK}${error.message}`
     error.status = 500
@@ -135,14 +126,16 @@ const createSale = async (req, res, next) => {
 
     await session.commitTransaction()
 
-    return res.status(201).json({ msg: 'Coche vendido correctamente' })
+    return res
+      .status(201)
+      .json({ data: { sale, car }, msg: 'Coche vendido correctamente' })
   } catch (error) {
     await session.abortTransaction()
 
     error.message = `Se ha producido un error al vender el coche:${helpers.LINE_BREAK}${helpers.formatErrorMsg(
       error.message
     )}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   } finally {
@@ -174,13 +167,16 @@ const deleteSaleById = async (req, res, next) => {
     // Al devolver un coche hay que añadir el nuevo kilometraje
 
     if (req.body.mileage == null || req.body.mileage.trim() === '') {
-      throw new Error(`mileage: ${validation.REQUIRED_MSG}`)
+      throw helpers.getValidationError('mileage', validation.REQUIRED_MSG)
     }
 
     const mileage = Number(req.body.mileage)
 
     if (!Number.isInteger(mileage) || !validation.isValidMileage(mileage)) {
-      throw new Error(validation.INVALID_MILEAGE_MSG)
+      throw helpers.getValidationError(
+        'mileage',
+        validation.INVALID_MILEAGE_MSG
+      )
     }
 
     await Sale.deleteOne(sale, { session })
@@ -195,12 +191,14 @@ const deleteSaleById = async (req, res, next) => {
 
     await session.commitTransaction()
 
-    return res.status(200).json({ msg: 'Coche devuelto correctamente' })
+    return res
+      .status(200)
+      .json({ data: { car }, msg: 'Coche devuelto correctamente' })
   } catch (error) {
     await session.abortTransaction()
 
     error.message = `Se ha producido un error al devolver el coche:${helpers.LINE_BREAK}${error.message}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   } finally {

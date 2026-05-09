@@ -15,9 +15,9 @@ const NOT_ALLOWED_VALUE_MSG = 'Valor no permitido'
 
 const INVALID_LICENSE_PLATE_MSG =
   'Matrícula no válida (formato: 4 dígitos y 3 consonantes, excluyendo la Ñ)'
-const INVALID_YEAR_MSG = 'Año no válido (formato: YYYY)'
+const INVALID_YEAR_MSG = 'Año no válido (formato: AAAA)'
 const INVALID_MAX_YEAR_MSG = `El año no puede ser posterior al año actual`
-const INVALID_DATE_MSG = 'Fecha no válida (formato: DD/MM/YYYY)'
+const INVALID_DATE_MSG = 'Fecha no válida (formato: DD/MM/AAAA)'
 const INVALID_MAX_DATE_MSG = `La fecha no puede ser posterior a la fecha actual`
 const INVALID_MILEAGE_MSG =
   'Kilometraje no válido (formato: número entero mayor que 0)'
@@ -96,6 +96,12 @@ const isValidPassword = (password) =>
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 
+const isValidationErrorMsg = (error) =>
+  error.name === 'ValidationError' ||
+  error.message.includes(UNIQUE_MSG) ||
+  error.message.includes('E11000 duplicate') ||
+  error.message.includes(getStatusCarMsg(''))
+
 const validation = {
   MIN_YEAR,
   MIN_PRICE,
@@ -140,7 +146,8 @@ const validation = {
   isValidMileage,
   isValidPrice,
   isValidPassword,
-  isValidEmail
+  isValidEmail,
+  isValidationErrorMsg
 }
 
 module.exports = { validation }

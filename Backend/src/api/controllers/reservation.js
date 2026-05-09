@@ -12,11 +12,7 @@ const getAllReservations = async (req, res, next) => {
       .populate('car')
       .populate('customer')
 
-    return res.status(200).json({
-      msg:
-        reservations.length === 0 ? 'No se han encontrado reservas' : undefined,
-      data: reservations
-    })
+    return res.status(200).json({ data: reservations })
   } catch (error) {
     error.message = `Se ha producido un error al consultar las reservas:${helpers.LINE_BREAK}${error.message}`
     error.status = 500
@@ -102,13 +98,7 @@ const getReservationsByCustomerId = async (req, res, next) => {
       .populate('car')
       .populate('customer')
 
-    return res.status(200).json({
-      msg:
-        reservations.length === 0
-          ? 'No se han encontrado reservas del cliente'
-          : undefined,
-      data: reservations
-    })
+    return res.status(200).json({ data: reservations })
   } catch (error) {
     error.message = `Se ha producido un error al consultar las reservas del cliente:${helpers.LINE_BREAK}${error.message}`
     error.status = 500
@@ -133,14 +123,18 @@ const createReservation = async (req, res, next) => {
 
     await session.commitTransaction()
 
-    return res.status(201).json({ msg: 'Coche reservado correctamente' })
+    return res.status(201).json({
+      data: { reservation, car },
+      msg: 'Coche reservado correctamente'
+    })
   } catch (error) {
+    console.log(error.name)
     await session.abortTransaction()
 
     error.message = `Se ha producido un error al reservar el coche:${helpers.LINE_BREAK}${helpers.formatErrorMsg(
       error.message
     )}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   } finally {
@@ -181,7 +175,9 @@ const deleteReservationById = async (req, res, next) => {
 
     await session.commitTransaction()
 
-    return res.status(200).json({ msg: 'Reserva anulada correctamente' })
+    return res
+      .status(200)
+      .json({ data: { car }, msg: 'Reserva anulada correctamente' })
   } catch (error) {
     await session.abortTransaction()
 

@@ -130,19 +130,20 @@ npm run createData
 
 A continuación se detallan las peticiones **HTTP** de la **API** de la colección **_car_** y sus posibles respuestas:
 
-| MÉTODO | URL                                  | DESCRIPCIÓN                  | LOGIN                         | PARÁMETROS              | CUERPO DE LA PETICIÓN                                         | CÓDIGO DE RESPUESTA | RESPUESTA                                              |
-| ------ | ------------------------------------ | ---------------------------- | ----------------------------- | ----------------------- | ------------------------------------------------------------- | ------------------- | ------------------------------------------------------ |
-| GET    | http://localhost:3000/car/get/all/   | Búsqueda de todos los coches | **_seller_** (no obligatorio) |                         |                                                               | 200                 | Lista de todos los coches ordenados por marca y modelo |
-| GET    | http://localhost:3000/car/get/id/    | Búsqueda de un coche         | **_seller_** (no obligatorio) | Identificador del coche |                                                               | 200                 | Coche                                                  |
-| POST   | http://localhost:3000/car/create/    | Creación de un coche         | **_admin_**                   |                         | **Multipart Form Data** con los campos del coche a crear      | 201                 | Mensaje de confirmación de la creación del coche       |
-| PUT    | http://localhost:3000/car/update/id/ | Actualización de un coche    | **_admin_**                   | Identificador del coche | **Multipart Form Data** con los campos a actualizar del coche | 200                 | Mensaje de confirmación de la actualización del coche  |
-| DEL    | http://localhost:3000/car/delete/id/ | Eliminación de un coche      | **_admin_**                   | Identificador del coche |                                                               | 200                 | Mensaje de confirmación de la eliminación del coche    |
+| MÉTODO | URL                                  | DESCRIPCIÓN                  | LOGIN        | PARÁMETROS              | CUERPO DE LA PETICIÓN                                         | CÓDIGO DE RESPUESTA | RESPUESTA                                                                 |
+| ------ | ------------------------------------ | ---------------------------- | ------------ | ----------------------- | ------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------- |
+| GET    | http://localhost:3000/car/get/all/   | Búsqueda de todos los coches | **_seller_** |                         |                                                               | 200                 | Lista de todos los coches ordenados por marca y modelo                    |
+| GET    | http://localhost:3000/car/get/id/    | Búsqueda de un coche         | **_seller_** | Identificador del coche |                                                               | 200                 | Coche                                                                     |
+| POST   | http://localhost:3000/car/create/    | Creación de un coche         | **_admin_**  |                         | **Multipart Form Data** con los campos del coche a crear      | 201                 | Coche creado y mensaje de confirmación de la creación del coche           |
+| PUT    | http://localhost:3000/car/update/id/ | Actualización de un coche    | **_admin_**  | Identificador del coche | **Multipart Form Data** con los campos a actualizar del coche | 200                 | Coche actualizado y mensaje de confirmación de la actualización del coche |
+| DEL    | http://localhost:3000/car/delete/id/ | Eliminación de un coche      | **_admin_**  | Identificador del coche |                                                               | 200                 | Mensaje de confirmación de la eliminación del coche                       |
 
 - El código de respuesta también puede ser **400** cuando falla la subida de la imagen del coche a **Cloudinary**
 - El código de respuesta también puede ser **403** cuando se intenta realizar una acción sin estar autorizado
 - El código de respuesta también puede ser **404** cuando no se encuentran resultados de búsqueda (métodos **GET**)
 - El código de respuesta también puede ser **413** cuando falla la subida de la imagen del coche a **Cloudinary** por no tener un tamaño válido
-- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición (por ejemplo, durante la validación de los campos del **Multipart Form Data** en los métodos **POST** y **PUT**)
+- El código de respuesta también puede ser **422** cuando se produce un error durante la validación de los datos
+- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición
 
 `Si se crea un coche con la condición "Nuevo" el kilometraje siempre es 0`
 `Si se crea un coche con la condición "Usado" el kilometraje tiene que ser mayor que 0`
@@ -161,18 +162,19 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 
 A continuación se detallan las peticiones **HTTP** de la **API** de la colección **_customer_** y sus posibles respuestas:
 
-| MÉTODO | URL                                       | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                | CUERPO DE LA PETICIÓN                                           | CÓDIGO DE RESPUESTA | RESPUESTA                                                    |
-| ------ | ----------------------------------------- | ------------------------------ | ------------ | ------------------------- | --------------------------------------------------------------- | ------------------- | ------------------------------------------------------------ |
-| GET    | http://localhost:3000/customer/get/all/   | Búsqueda de todos los clientes | **_seller_** |                           |                                                                 | 200                 | Lista de todos los clientes ordenados por apellidos y nombre |
-| GET    | http://localhost:3000/customer/get/id/    | Búsqueda de un cliente         | **_seller_** | Identificador del cliente |                                                                 | 200                 | Cliente                                                      |
-| POST   | http://localhost:3000/customer/create/    | Creación de un cliente         | **_seller_** |                           | **Multipart Form Data** con los campos del cliente a crear      | 201                 | Mensaje de confirmación de la creación del cliente           |
-| PUT    | http://localhost:3000/customer/update/id/ | Actualización de un cliente    | **_seller_** | Identificador del cliente | **Multipart Form Data** con los campos a actualizar del cliente | 200                 | Mensaje de confirmación de la actualización del cliente      |
-| DEL    | http://localhost:3000/customer/delete/id/ | Eliminación de un cliente      | **_seller_** | Identificador del cliente |                                                                 | 200                 | Mensaje de confirmación de la eliminación del cliente        |
+| MÉTODO | URL                                       | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                | CUERPO DE LA PETICIÓN                                           | CÓDIGO DE RESPUESTA | RESPUESTA                                                                     |
+| ------ | ----------------------------------------- | ------------------------------ | ------------ | ------------------------- | --------------------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------- |
+| GET    | http://localhost:3000/customer/get/all/   | Búsqueda de todos los clientes | **_seller_** |                           |                                                                 | 200                 | Lista de todos los clientes ordenados por apellidos y nombre                  |
+| GET    | http://localhost:3000/customer/get/id/    | Búsqueda de un cliente         | **_seller_** | Identificador del cliente |                                                                 | 200                 | Cliente                                                                       |
+| POST   | http://localhost:3000/customer/create/    | Creación de un cliente         | **_seller_** |                           | **Multipart Form Data** con los campos del cliente a crear      | 201                 | Cliente creado y mensaje de confirmación de la creación del cliente           |
+| PUT    | http://localhost:3000/customer/update/id/ | Actualización de un cliente    | **_seller_** | Identificador del cliente | **Multipart Form Data** con los campos a actualizar del cliente | 200                 | Cliente actualizado y mensaje de confirmación de la actualización del cliente |
+| DEL    | http://localhost:3000/customer/delete/id/ | Eliminación de un cliente      | **_seller_** | Identificador del cliente |                                                                 | 200                 | Mensaje de confirmación de la eliminación del cliente                         |
 
 - El código de respuesta también puede ser **400** cuando falla la subida del cliente
 - El código de respuesta también puede ser **403** cuando se intenta realizar una acción sin estar autorizado
 - El código de respuesta también puede ser **404** cuando no se encuentran resultados de búsqueda (métodos **GET**)
-- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición (por ejemplo, durante la validación de los campos del **Multipart Form Data** en los métodos **POST** y **PUT**)
+- El código de respuesta también puede ser **422** cuando se produce un error durante la validación de los datos
+- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición
 
 `No se puede eliminar un cliente con coches reservados o vendidos`
 
@@ -186,13 +188,14 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 | GET    | http://localhost:3000/reservation/get/id/          | Búsqueda de una reserva        | **_seller_** | Identificador de la reserva             |                                                              | 200                 | Reserva                                                                                                        |
 | GET    | http://localhost:3000/reservation/get/car-id/      | Búsqueda de una reserva        | **_seller_** | Identificador del coche de la reserva   |                                                              | 200                 | Reserva                                                                                                        |
 | GET    | http://localhost:3000/reservation/get/customer-id/ | Búsqueda filtrada              | **_seller_** | Identificador del cliente de la reserva |                                                              | 200                 | Lista de reservas filtradas por identificador del cliente y ordenadas descendentemente por fecha de la reserva |
-| POST   | http://localhost:3000/reservation/create/          | Reserva de un coche            | **_seller_** |                                         | **Multipart Form Data** con los campos de la reserva a crear | 201                 | Mensaje de confirmación de la reserva del coche                                                                |
-| DEL    | http://localhost:3000/reservation/delete/id/       | Anulación de una reserva       | **_seller_** | Identificador de la reserva             |                                                              | 200                 | Mensaje de confirmación de la anulación de la reserva                                                          |
+| POST   | http://localhost:3000/reservation/create/          | Reserva de un coche            | **_seller_** |                                         | **Multipart Form Data** con los campos de la reserva a crear | 201                 | Reserva del coche, coche actualizado y mensaje de confirmación de la reserva del coche                         |
+| DEL    | http://localhost:3000/reservation/delete/id/       | Anulación de una reserva       | **_seller_** | Identificador de la reserva             |                                                              | 200                 | Coche actualizado y mensaje de confirmación de la anulación de la reserva                                      |
 
 - El código de respuesta también puede ser **400** cuando falla la subida de la reserva
 - El código de respuesta también puede ser **403** cuando se intenta realizar una acción sin estar autorizado
 - El código de respuesta también puede ser **404** cuando no se encuentran resultados de búsqueda (métodos **GET**)
-- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición (por ejemplo, durante la validación de los campos del **Multipart Form Data** en los métodos **POST** y **PUT**)
+- El código de respuesta también puede ser **422** cuando se produce un error durante la validación de los datos
+- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición
 
 > La información de una reserva se puebla con la información del coche y del cliente de dicha reserva
 
@@ -209,13 +212,14 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 | GET    | http://localhost:3000/sale/get/id/          | Búsqueda de una venta        | **_seller_** | Identificador de la venta             |                                                            | 200                 | Venta                                                                                                      |
 | GET    | http://localhost:3000/sale/get/car-id/      | Búsqueda de una venta        | **_seller_** | Identificador del coche de la venta   |                                                            | 200                 | Venta                                                                                                      |
 | GET    | http://localhost:3000/sale/get/customer-id/ | Búsqueda filtrada            | **_seller_** | Identificador del cliente de la venta |                                                            | 200                 | Lista de ventas filtradas por identificador del cliente y ordenadas descendentemente por fecha de la venta |
-| POST   | http://localhost:3000/sale/create/          | Venta de un coche            | **_seller_** |                                       | **Multipart Form Data** con los campos de la venta a crear | 201                 | Mensaje de confirmación de la venta del coche                                                              |
-| DEL    | http://localhost:3000/sale/delete/id/       | Devolución de un coche       | **_seller_** | Identificador de la venta             |                                                            | 200                 | Mensaje de confirmación de la devolución del coche                                                         |
+| POST   | http://localhost:3000/sale/create/          | Venta de un coche            | **_seller_** |                                       | **Multipart Form Data** con los campos de la venta a crear | 201                 | Venta del coche, coche actualizado y mensaje de confirmación de la venta del coche                         |
+| DEL    | http://localhost:3000/sale/delete/id/       | Devolución de un coche       | **_seller_** | Identificador de la venta             |                                                            | 200                 | Coche actualizado y mensaje de confirmación de la devolución del coche                                     |
 
 - El código de respuesta también puede ser **400** cuando falla la subida de la venta
 - El código de respuesta también puede ser **403** cuando se intenta realizar una acción sin estar autorizado
 - El código de respuesta también puede ser **404** cuando no se encuentran resultados de búsqueda (métodos **GET**)
-- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición (por ejemplo, durante la validación de los campos del **Multipart Form Data** en los métodos **POST** y **PUT**)
+- El código de respuesta también puede ser **422** cuando se produce un error durante la validación de los datos
+- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición
 
 > La información de una venta se puebla con la información del coche y del cliente de dicha venta
 
@@ -229,20 +233,21 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 
 A continuación se detallan las peticiones **HTTP** de la **API** de la colección **_user_** y sus posibles respuestas:
 
-| MÉTODO | URL                                   | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                | CUERPO DE LA PETICIÓN                                                                         | CÓDIGO DE RESPUESTA | RESPUESTA                                                   |
-| ------ | ------------------------------------- | ------------------------------ | ------------ | ------------------------- | --------------------------------------------------------------------------------------------- | ------------------- | ----------------------------------------------------------- |
-| GET    | http://localhost:3000/user/get/all/   | Búsqueda de todos los usuarios | **_admin_**  |                           |                                                                                               | 200                 | Lista de todos los usuarios ordenados por nombre de usuario |
-| GET    | http://localhost:3000/user/get/id/    | Búsqueda de un usuario         | **_seller_** | Identificador del usuario |                                                                                               | 200                 | Usuario                                                     |
-| POST   | http://localhost:3000/user/login/     | Inicio de sesión de un usuario | ---          |                           | **Multipart Form Data** con el nombre de usuario y la contraseña del usuario a iniciar sesión | 200                 | Token de autorización generado                              |
-| POST   | http://localhost:3000/user/create/    | Creación de un usuario         | **_admin_**  |                           | **Multipart Form Data** con los campos del usuario a crear                                    | 201                 | Mensaje de confirmación de la creación del usuario          |
-| PUT    | http://localhost:3000/user/update/id/ | Actualización de un usuario    | **_seller_** | Identificador del usuario | **Multipart Form Data** con los campos a actualizar del usuario                               | 200                 | Mensaje de confirmación de la actualización del usuario     |
-| DEL    | http://localhost:3000/user/delete/id/ | Eliminación de un usuario      | **_admin_**  | Identificador del usuario |                                                                                               | 200                 | Mensaje de confirmación de la eliminación del usuario       |
+| MÉTODO | URL                                   | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                | CUERPO DE LA PETICIÓN                                                                         | CÓDIGO DE RESPUESTA | RESPUESTA                                                                                                                      |
+| ------ | ------------------------------------- | ------------------------------ | ------------ | ------------------------- | --------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| GET    | http://localhost:3000/user/get/all/   | Búsqueda de todos los usuarios | **_admin_**  |                           |                                                                                               | 200                 | Lista de todos los usuarios ordenados por nombre de usuario                                                                    |
+| GET    | http://localhost:3000/user/get/id/    | Búsqueda de un usuario         | **_seller_** | Identificador del usuario |                                                                                               | 200                 | Usuario                                                                                                                        |
+| POST   | http://localhost:3000/user/login/     | Inicio de sesión de un usuario | ---          |                           | **Multipart Form Data** con el nombre de usuario y la contraseña del usuario a iniciar sesión | 200                 | Token de autorización generado, fecha de expiración del token e identificador, nombre y rol del usuario que ha iniciado sesión |
+| POST   | http://localhost:3000/user/create/    | Creación de un usuario         | **_admin_**  |                           | **Multipart Form Data** con los campos del usuario a crear                                    | 201                 | Usuario creado y mensaje de confirmación de la creación del usuario                                                            |
+| PUT    | http://localhost:3000/user/update/id/ | Actualización de un usuario    | **_seller_** | Identificador del usuario | **Multipart Form Data** con los campos a actualizar del usuario                               | 200                 | Usuario actualizado y mensaje de confirmación de la actualización del usuario                                                  |
+| DEL    | http://localhost:3000/user/delete/id/ | Eliminación de un usuario      | **_admin_**  | Identificador del usuario |                                                                                               | 200                 | Mensaje de confirmación de la eliminación del usuario                                                                          |
 
 - El código de respuesta también puede ser **400** cuando falla la subida del usuario
 - El código de respuesta también puede ser **401** cuando falla el inicio de sesión del usuario
 - El código de respuesta también puede ser **403** cuando se intenta realizar una acción sin estar autorizado
 - El código de respuesta también puede ser **404** cuando no se encuentran resultados de búsqueda (métodos **GET**)
-- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición (por ejemplo, durante la validación de los campos del **Multipart Form Data** en los métodos **POST** y **PUT**)
+- El código de respuesta también puede ser **422** cuando se produce un error durante la validación de los datos
+- El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición
 
 `Un usuario que no sea "admin" sólo puede consultar y actualizar su propio usuario`
 `El usuario "superadmin" no se puede actualizar ni eliminar`

@@ -7,17 +7,9 @@ const { uploadCarImg } = require('../../middlewares/upload')
 
 const carRouter = express.Router()
 
-carRouter.get(
-  '/get/all/',
-  isAuthorizedUser({ isRequiredLogin: false }),
-  carController.getAllCars
-)
+carRouter.get('/get/all/', isAuthorizedUser(), carController.getAllCars)
 
-carRouter.get(
-  '/get/id/:id',
-  isAuthorizedUser({ isRequiredLogin: false }),
-  carController.getCarById
-)
+carRouter.get('/get/id/:id', isAuthorizedUser(), carController.getCarById)
 
 carRouter.post(
   '/create/',

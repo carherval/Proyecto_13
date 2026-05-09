@@ -1,5 +1,6 @@
 const fs = require('fs')
 const moment = require('moment')
+const mongoose = require('mongoose')
 const readline = require('readline')
 
 const LINE_BREAK = '<br /><br />'
@@ -103,6 +104,14 @@ const getError = (msg, status) => {
   return error
 }
 
+const getValidationError = (field, message) => {
+  const error = new mongoose.Error.ValidationError()
+
+  error.addError(field, new mongoose.Error.ValidatorError({ message }))
+
+  return error
+}
+
 const formatErrorMsg = (msg) =>
   msg.replaceAll("', '", "','").replaceAll(', ', LINE_BREAK)
 
@@ -121,6 +130,7 @@ const helpers = {
   normalizeString,
   normalizeUserName,
   getError,
+  getValidationError,
   formatErrorMsg
 }
 

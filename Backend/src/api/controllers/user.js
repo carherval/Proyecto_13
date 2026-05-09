@@ -9,10 +9,7 @@ const getAllUsers = async (req, res, next) => {
   try {
     const users = (await User.find()).sort(helpers.sortUsers)
 
-    return res.status(200).json({
-      msg: users.length === 0 ? 'No se han encontrado usuarios' : undefined,
-      data: users
-    })
+    return res.status(200).json({ data: users })
   } catch (error) {
     error.message = `Se ha producido un error al consultar los usuarios:${helpers.LINE_BREAK}${error.message}`
     error.status = 500
@@ -93,28 +90,34 @@ const loginUser = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   try {
-    // Se valida aquí y no en el "validate" del modelo porque, si no, en el modelo se validaría el "hash" del cifrado de la contraseña, no la contraseña
-    if (
-      req.body.password != null &&
-      !validation.isValidPassword(req.body.password)
-    ) {
-      throw new Error(validation.INVALID_PASSWORD_MSG)
-    }
-
-    // Cifrado de la contraseña
-    // Al ser creación del usuario se podría hacer en el "middleware" "pre save" ya que siempre se tiene que cifrar
     if (req.body.password != null) {
+      // Se valida aquí y no en el "validate" del modelo porque, si no, en el modelo se validaría el "hash" del cifrado de la contraseña, no la contraseña
+      if (req.body.password.trim() === '') {
+        throw helpers.getValidationError('password', validation.REQUIRED_MSG)
+      }
+      if (!validation.isValidPassword(req.body.password)) {
+        throw helpers.getValidationError(
+          'password',
+          validation.INVALID_PASSWORD_MSG
+        )
+      }
+
+      // Cifrado de la contraseña
+      // Al ser creación del usuario se podría hacer en el "middleware" "pre save" ya que siempre se tiene que cifrar
       req.body.password = bcrypt.hashSync(req.body.password, 10)
     }
 
-    await new User(req.body).save()
+    const user = await new User(req.body).save()
+    const { password, ...userWithoutPassword } = user.toObject()
 
-    return res.status(201).json({ msg: 'Usuario creado correctamente' })
+    return res
+      .status(201)
+      .json({ data: userWithoutPassword, msg: 'Usuario creado correctamente' })
   } catch (error) {
     error.message = `Se ha producido un error al crear el usuario:${helpers.LINE_BREAK}${helpers.formatErrorMsg(
       error.message
     )}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   }
@@ -155,7 +158,7 @@ const updateUserById = async (req, res, next) => {
     }
 
     if (Object.keys(req.body).length === 0) {
-      throw new Error(validation.NO_UPDATE_DATA)
+      throw helpers.getValidationError('form', validation.NO_UPDATE_DATA)
     }
 
     const updatedUser = new User(user)
@@ -163,8 +166,16 @@ const updateUserById = async (req, res, next) => {
     const { surnames, name, username, password, email, role } = req.body
 
     // Se valida aquí y no en el "validate" del modelo porque, si no, en el modelo se validaría el "hash" del cifrado de la contraseña, no la contraseña
-    if (password != null && !validation.isValidPassword(password)) {
-      throw new Error(validation.INVALID_PASSWORD_MSG)
+    if (password != null) {
+      if (password.trim() === '') {
+        throw helpers.getValidationError('password', validation.REQUIRED_MSG)
+      }
+      if (!validation.isValidPassword(password)) {
+        throw helpers.getValidationError(
+          'password',
+          validation.INVALID_PASSWORD_MSG
+        )
+      }
     }
 
     updatedUser.surnames = surnames ?? updatedUser.surnames
@@ -183,12 +194,18 @@ const updateUserById = async (req, res, next) => {
 
     await updatedUser.save()
 
-    return res.status(200).json({ msg: 'Usuario actualizado correctamente' })
+    const { userPassword, ...updatedUserWithoutPassword } =
+      updatedUser.toObject()
+
+    return res.status(200).json({
+      data: updatedUserWithoutPassword,
+      msg: 'Usuario actualizado correctamente'
+    })
   } catch (error) {
     error.message = `Se ha producido un error al actualizar el usuario:${helpers.LINE_BREAK}${helpers.formatErrorMsg(
       error.message
     )}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   }

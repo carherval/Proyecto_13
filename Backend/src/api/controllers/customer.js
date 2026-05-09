@@ -9,10 +9,7 @@ const getAllCustomers = async (req, res, next) => {
   try {
     const customers = (await Customer.find()).sort(helpers.sortCustomers)
 
-    return res.status(200).json({
-      msg: customers.length === 0 ? 'No se han encontrado clientes' : undefined,
-      data: customers
-    })
+    return res.status(200).json({ data: customers })
   } catch (error) {
     error.message = `Se ha producido un error al consultar los clientes:${helpers.LINE_BREAK}${error.message}`
     error.status = 500
@@ -44,14 +41,16 @@ const getCustomerById = async (req, res, next) => {
 
 const createCustomer = async (req, res, next) => {
   try {
-    await new Customer(req.body).save()
+    const customer = await new Customer(req.body).save()
 
-    return res.status(201).json({ msg: 'Cliente creado correctamente' })
+    return res
+      .status(201)
+      .json({ data: customer, msg: 'Cliente creado correctamente' })
   } catch (error) {
     error.message = `Se ha producido un error al crear el cliente:${helpers.LINE_BREAK}${helpers.formatErrorMsg(
       error.message
     )}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   }
@@ -74,7 +73,7 @@ const updateCustomerById = async (req, res, next) => {
     }
 
     if (Object.keys(req.body).length === 0) {
-      throw new Error(validation.NO_UPDATE_DATA)
+      throw helpers.getValidationError('form', validation.NO_UPDATE_DATA)
     }
 
     const updatedCustomer = new Customer(customer)
@@ -87,12 +86,14 @@ const updateCustomerById = async (req, res, next) => {
 
     await updatedCustomer.save()
 
-    return res.status(200).json({ msg: 'Cliente actualizado correctamente' })
+    return res
+      .status(200)
+      .json({ data: updatedCustomer, msg: 'Cliente actualizado correctamente' })
   } catch (error) {
     error.message = `Se ha producido un error al actualizar el cliente:${helpers.LINE_BREAK}${helpers.formatErrorMsg(
       error.message
     )}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   }
@@ -120,7 +121,10 @@ const deleteCustomerById = async (req, res, next) => {
         (await Sale.find({ customer })).length >
       0
     ) {
-      throw new Error(validation.CANNOT_DELETE_CUSTOMER_WITH_CARS_MSG)
+      throw helpers.getValidationError(
+        'form',
+        validation.CANNOT_DELETE_CUSTOMER_WITH_CARS_MSG
+      )
     }
 
     await Customer.deleteOne(customer)
@@ -128,7 +132,7 @@ const deleteCustomerById = async (req, res, next) => {
     return res.status(200).json({ msg: 'Cliente eliminado correctamente' })
   } catch (error) {
     error.message = `Se ha producido un error al eliminar el cliente:${helpers.LINE_BREAK}${error.message}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   }

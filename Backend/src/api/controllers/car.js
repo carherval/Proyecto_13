@@ -8,10 +8,7 @@ const getAllCars = async (req, res, next) => {
   try {
     const cars = (await Car.find()).sort(helpers.sortCars)
 
-    return res.status(200).json({
-      msg: cars.length === 0 ? 'No se han encontrado coches' : undefined,
-      data: cars
-    })
+    return res.status(200).json({ data: cars })
   } catch (error) {
     error.message = `Se ha producido un error al consultar los coches:${helpers.LINE_BREAK}${error.message}`
     error.status = 500
@@ -59,9 +56,12 @@ const createCar = async (req, res, next) => {
     }
 
     req.body.status = CAR_STATUSES.available
-    await new Car(req.body).save()
 
-    return res.status(201).json({ msg: 'Coche creado correctamente' })
+    const car = await new Car(req.body).save()
+
+    return res
+      .status(201)
+      .json({ data: car, msg: 'Coche creado correctamente' })
   } catch (error) {
     const msg = 'Se ha producido un error al crear el coche'
 
@@ -72,7 +72,7 @@ const createCar = async (req, res, next) => {
     error.message = `${msg}:${helpers.LINE_BREAK}${helpers.formatErrorMsg(
       error.message
     )}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   }
@@ -104,7 +104,7 @@ const updateCarById = async (req, res, next) => {
     }
 
     if (Object.keys(req.body).length === 0 && req.file == null) {
-      throw new Error(validation.NO_UPDATE_DATA)
+      throw helpers.getValidationError('form', validation.NO_UPDATE_DATA)
     }
 
     const updatedCar = new Car(car)
@@ -132,7 +132,9 @@ const updateCarById = async (req, res, next) => {
 
     await session.commitTransaction()
 
-    return res.status(200).json({ msg: 'Coche actualizado correctamente' })
+    return res
+      .status(200)
+      .json({ data: updatedCar, msg: 'Coche actualizado correctamente' })
   } catch (error) {
     await session.abortTransaction()
 
@@ -145,7 +147,7 @@ const updateCarById = async (req, res, next) => {
     error.message = `${msg}:${helpers.LINE_BREAK}${helpers.formatErrorMsg(
       error.message
     )}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   } finally {
@@ -175,7 +177,10 @@ const deleteCarById = async (req, res, next) => {
 
     // No se puede eliminar un coche que no está disponible
     if (car.status !== CAR_STATUSES.available) {
-      throw new Error(validation.CANNOT_DELETE_NOT_AVAILABLE_CAR)
+      throw helpers.getValidationError(
+        'form',
+        validation.CANNOT_DELETE_NOT_AVAILABLE_CAR
+      )
     }
 
     await Car.deleteOne(car, { session })
@@ -191,7 +196,7 @@ const deleteCarById = async (req, res, next) => {
     await session.abortTransaction()
 
     error.message = `Se ha producido un error al eliminar el coche:${helpers.LINE_BREAK}${error.message}`
-    error.status = 500
+    error.status = validation.isValidationErrorMsg(error) ? 422 : 500
 
     return next(error)
   } finally {
