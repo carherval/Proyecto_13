@@ -227,7 +227,7 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 `No se puede vender a un cliente un coche reservado a otro cliente`
 `Si se vende un coche reservado se anula la reserva`
 `Cuando se vende un coche se actualiza el estado del coche`
-`Cuando se devuelve un coche se actualiza la condición, el kilometraje (hay que añadir el nuevo kilometraje) y el estado del coche`
+`Cuando se devuelve un coche se actualiza la condición, el kilometraje (hay que añadir el kilometraje realizado) y el estado del coche`
 
 ## Endpoints de la colección _user_
 

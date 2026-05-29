@@ -164,7 +164,7 @@ const deleteSaleById = async (req, res, next) => {
       return next(helpers.getError(validation.getSaleNotFoundByIdMsg(id), 404))
     }
 
-    // Al devolver un coche hay que añadir el nuevo kilometraje
+    // Al devolver un coche hay que añadir el kilometraje realizado
 
     if (req.body.mileage == null || req.body.mileage.trim() === '') {
       throw helpers.getValidationError('mileage', validation.REQUIRED_MSG)
