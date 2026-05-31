@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import RequiredNote from '../Form/RequiredNote'
 import { MENU_OPTIONS } from '../Menu/Menu'
 import DeleteSaleForm from './DeleteSaleForm'
 import useDialog from '../../hooks/useDialog'
@@ -60,68 +61,93 @@ const ReservationSaleData = ({ reservationSale }) => {
 
   return (
     <>
-      {isReservation && (
-        <>
-          <button
-            type={strings.INPUT_FIELD_TYPES.button}
-            onClick={() =>
-              showConfirmDialog(
-                strings.ACTION_CONFIRM_MSG,
-                handleDeleteReservationById
-              )
-            }
-          >
-            {strings.RESERVATION_ACTIONS.delete.label}
-          </button>
+      <section className='btn-box'>
+        <div>
+          {isReservation && (
+            <>
+              <button
+                type={strings.INPUT_FIELD_TYPES.button}
+                onClick={() =>
+                  showConfirmDialog(
+                    strings.ACTION_CONFIRM_MSG,
+                    handleDeleteReservationById
+                  )
+                }
+              >
+                {strings.RESERVATION_ACTIONS.delete.label}
+              </button>
 
-          <button
-            type={strings.INPUT_FIELD_TYPES.button}
-            onClick={() =>
-              showConfirmDialog(strings.ACTION_CONFIRM_MSG, handleCreateSale)
-            }
-          >
-            {strings.SALE_ACTIONS.create.label}
-          </button>
-        </>
-      )}
+              <button
+                type={strings.INPUT_FIELD_TYPES.button}
+                onClick={() =>
+                  showConfirmDialog(
+                    strings.ACTION_CONFIRM_MSG,
+                    handleCreateSale
+                  )
+                }
+              >
+                {strings.SALE_ACTIONS.create.label}
+              </button>
+            </>
+          )}
 
-      {!isReservation && (
-        <form onSubmit={handleSubmit(submit)}>
-          <DeleteSaleForm register={register} />
-        </form>
-      )}
+          {!isReservation && (
+            <section className='form'>
+              <RequiredNote />
+              <form onSubmit={handleSubmit(submit)}>
+                <DeleteSaleForm register={register} />
+              </form>
+            </section>
+          )}
+        </div>
+      </section>
 
-      <div>
-        {isReservation
-          ? strings.RESERVATION_FIELDS.reservationDate.label
-          : strings.SALE_FIELDS.saleDate.label}
-        :{' '}
-        {helpers.getFormattedDate(
-          isReservation
-            ? reservationSale.reservationDate
-            : reservationSale.saleDate
-        )}
-      </div>
+      <section className='info'>
+        <article>
+          <div className='data'>
+            <div>
+              <div>
+                {isReservation
+                  ? strings.RESERVATION_FIELDS.reservationDate.label
+                  : strings.SALE_FIELDS.saleDate.label}
+              </div>
+              <div>
+                {helpers.getFormattedDate(
+                  isReservation
+                    ? reservationSale.reservationDate
+                    : reservationSale.saleDate
+                )}
+              </div>
+            </div>
 
-      <div>
-        {strings.RESERVATION_SALE_FIELDS.car.label}:{' '}
-        <Link
-          to={`/${MENU_OPTIONS.cars.id}/${strings.CAR_ACTIONS.info.id}`}
-          state={{ id: reservationSale.car._id }}
-        >
-          {helpers.getCarDescr(reservationSale.car)}
-        </Link>
-      </div>
+            <div>
+              <div>{strings.RESERVATION_SALE_FIELDS.car.label}</div>
+              <div>
+                <Link
+                  to={`/${MENU_OPTIONS.cars.id}/${strings.CAR_ACTIONS.info.id}`}
+                  title={strings.CAR_ACTIONS.info.label}
+                  state={{ id: reservationSale.car._id }}
+                >
+                  {helpers.getCarDescr(reservationSale.car)}
+                </Link>
+              </div>
+            </div>
 
-      <div>
-        {strings.RESERVATION_SALE_FIELDS.customer.label}:{' '}
-        <Link
-          to={`/${MENU_OPTIONS.customers.id}/${strings.CUSTOMER_ACTIONS.info.id}`}
-          state={{ id: reservationSale.customer._id }}
-        >
-          {helpers.getCustomerFullName(reservationSale.customer)}
-        </Link>
-      </div>
+            <div>
+              <div>{strings.RESERVATION_SALE_FIELDS.customer.label}</div>
+              <div>
+                <Link
+                  to={`/${MENU_OPTIONS.customers.id}/${strings.CUSTOMER_ACTIONS.info.id}`}
+                  title={strings.CUSTOMER_ACTIONS.info.label}
+                  state={{ id: reservationSale.customer._id }}
+                >
+                  {helpers.getCustomerFullName(reservationSale.customer)}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
     </>
   )
 }

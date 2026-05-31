@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import RequiredNote from '../../components/Form/RequiredNote'
 import UserForm from '../../components/User/UserForm'
 import useFetchWithDialog from '../../hooks/useFetchWithDialog'
 import userFetch from '../../utils/fetch/user'
@@ -21,9 +22,12 @@ const CreateUser = () => {
     <>
       <h2>{strings.USER_ACTIONS.create.label}</h2>
 
-      <form onSubmit={handleSubmit(submit)}>
-        <UserForm register={register} />
-      </form>
+      <section className='form'>
+        <RequiredNote />
+        <form onSubmit={handleSubmit(submit)}>
+          <UserForm register={register} />
+        </form>
+      </section>
     </>
   )
 }

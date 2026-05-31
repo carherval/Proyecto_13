@@ -5,20 +5,19 @@ import strings from '../../utils/strings'
 // Componente que devuelve los campos para la búsqueda filtrada de coches
 const CarFilterForm = ({ register, isCarsSection = true }) => (
   <>
-    <div className='flex'>
+    <div>
       <TextField
         id={strings.RESERVATION_SALE_FIELDS.car.id}
-        label={strings.RESERVATION_SALE_FIELDS.car.label}
-        placeholder={`${strings.CAR_FIELDS.licensePlate.label}, ${strings.CAR_FIELDS.make.label}, ${strings.CAR_FIELDS.model.label}, ${strings.CAR_FIELDS.color.label}`}
+        placeholder={`${strings.CAR_FIELDS.licensePlate.label}, ${strings.CAR_FIELDS.make.label}, ${strings.CAR_FIELDS.model.label}, ${strings.CAR_FIELDS.color.label} del ${strings.RESERVATION_SALE_FIELDS.car.label.toLowerCase()}`}
         register={register}
         isRequired={false}
       />
     </div>
 
-    <div className='flex'>
+    <div>
       <RadioGroupField
         id={strings.CAR_FIELDS.condition.id}
-        label={strings.CAR_FIELDS.condition.label}
+        label={`${strings.CAR_FIELDS.condition.label}${!isCarsSection ? ' del ' + strings.RESERVATION_SALE_FIELDS.car.label.toLowerCase() : ''}`}
         options={strings.CAR_CONDITION_FILTER_OPTIONS}
         register={register}
       />
@@ -26,7 +25,7 @@ const CarFilterForm = ({ register, isCarsSection = true }) => (
 
     {/* El filtrado por el estado del coche es sólo para la sección de coches */}
     {isCarsSection && (
-      <div className='flex'>
+      <div>
         <RadioGroupField
           id={strings.CAR_FIELDS.status.id}
           label={strings.CAR_FIELDS.status.label}

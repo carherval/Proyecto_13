@@ -1,0 +1,102 @@
+/* Campos obligatorios */
+
+.required-note {
+  font-size: 1.75rem;
+  text-align: left;
+  color: $front-color;
+}
+
+.required {
+  font-size: 1.75rem;
+  color: $red-color;
+}
+
+/* Campo de selección de fecha mediante un calendario */
+.date {
+  > div {
+    @include width;
+
+    .react-datepicker-popper .react-datepicker__header {
+      background-color: $front-color;
+
+      h2 {
+        font-size: 1.5rem;
+        @include color($invert: true);
+      }
+    }
+
+    input {
+      cursor: pointer;
+    }
+  }
+}
+
+/* Botones de radio */
+.rd-btn {
+  input {
+    @extend %visually-hidden;
+  }
+
+  span {
+    display: inline-block;
+    @include bordered-box($border-width: 0.25rem, $border-color: transparent);
+    @include color($background: $green2-color);
+    cursor: pointer;
+  }
+
+  input:focus + span {
+    @include border(0.25rem, $green2-color);
+  }
+
+  input:checked + span {
+    @include color($invert: true);
+  }
+}
+
+/* Campo de selección única mediante filtro */
+.slct-fltr {
+  > div {
+    cursor: pointer;
+
+    * {
+      @include color($background: $white-color);
+    }
+  }
+
+  .css-1dimb5e-singleValue {
+    grid-area: none;
+  }
+
+  .sf__control--is-focused {
+    border-color: $black-color !important;
+    box-shadow: 0 0 0 1px $black-color !important;
+  }
+
+  .sf__option--is-focused {
+    color: $white-color !important;
+    background-color: $blue-color !important;
+  }
+}
+
+/* Campo de selección de archivo */
+.file {
+  @include btn;
+  @include flex;
+
+  &:hover > span {
+    color: $background-color;
+  }
+
+  &:focus-within {
+    @include outline;
+  }
+
+  > input {
+    @extend %visually-hidden;
+  }
+
+  > span {
+    font-size: 1.75rem;
+    @include color($background: transparent);
+  }
+}

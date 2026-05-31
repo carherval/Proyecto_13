@@ -1,0 +1,392 @@
+/* Anchuras y tamaño de la fuente */
+
+@include media-querie($max: $mobile-l) {
+  :root {
+    --menu-width: 75%;
+    --login-form-width: 75%;
+    --form-width: 100%;
+    --search-width: 100%;
+    --results-width: 100%;
+    --info-width: 100%;
+    font-size: 8px;
+  }
+}
+
+@include media-querie($mobile-l + 1, $tablet) {
+  :root {
+    --menu-width: 75%;
+    --login-form-width: 40%;
+    --form-width: 75%;
+    --search-width: 85%;
+    --results-width: 90%;
+    --info-width: 75%;
+    font-size: 9px;
+  }
+}
+
+@include media-querie($tablet + 1, $laptop) {
+  :root {
+    --menu-width: 60%;
+    --login-form-width: 30%;
+    --form-width: 60%;
+    --search-width: 65%;
+    --results-width: 75%;
+    --info-width: 60%;
+    font-size: 9px;
+  }
+}
+
+@include media-querie($laptop + 1, $laptop-l) {
+  :root {
+    --menu-width: 50%;
+    --login-form-width: 25%;
+    --form-width: 50%;
+    --search-width: 50%;
+    --results-width: 55%;
+    --info-width: 50%;
+    font-size: 9px;
+  }
+}
+
+@include media-querie($laptop-l + 1, $screen-4k - 1) {
+  :root {
+    --menu-width: 50%;
+    --login-form-width: 25%;
+    --form-width: 50%;
+    --search-width: 50%;
+    --results-width: 55%;
+    --info-width: 50%;
+    font-size: 12px;
+  }
+}
+
+@include media-querie($min: $screen-4k) {
+  :root {
+    --menu-width: 40%;
+    --login-form-width: 20%;
+    --form-width: 40%;
+    --search-width: 40%;
+    --results-width: 45%;
+    --info-width: 40%;
+    font-size: 12px;
+  }
+}
+
+/* Estilos generales iniciales */
+* {
+  margin: 0;
+  border: none;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Delius', sans-serif;
+  font-size: 1.5rem;
+  @include color;
+}
+
+/* Estilos generales */
+
+h2 {
+  padding: $default-gap;
+  font-size: 2.5rem;
+}
+
+h3 {
+  padding: $default-gap;
+  font-size: 2rem;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  color: $front-color;
+  text-decoration: none;
+  @include transition;
+
+  span {
+    @include transition;
+  }
+
+  &:hover {
+    color: $green-color;
+  }
+}
+
+/* Cuerpo principal de la página */
+.content {
+  height: calc(100vh - #{$header-height + 1.5}rem);
+  padding: 2rem 4rem;
+  overflow-y: auto;
+  @include flex($flex-direction: column, $justify-content: start);
+}
+
+/* Botonera de acciones */
+.btn-box {
+  @include width;
+  padding: 1rem;
+  @include flex;
+
+  > div {
+    @include width;
+    @include flex;
+
+    a,
+    button {
+      @include btn;
+    }
+  }
+}
+
+/* Búsqueda filtrada */
+.search {
+  @include width(var(--search-width));
+  @include bordered-box($border-radius: $default-border-radius, $padding: 0);
+  @include flex($flex-direction: column);
+
+  > form {
+    @include width(75%);
+    padding: $default-gap;
+    @include flex($flex-direction: column);
+
+    > div {
+      @include width;
+      @include flex($justify-content: space-between, $flex-wrap: wrap);
+
+      > span {
+        text-align: left;
+      }
+
+      input {
+        @include width;
+        @include bordered-box;
+        @include color($background: $white-color);
+      }
+    }
+  }
+}
+
+/* Resultados de búsqueda */
+.results {
+  @include width;
+  @include flex;
+
+  > ul {
+    @include width(var(--results-width));
+    @include flex(
+      $justify-content: space-evenly,
+      $align-items: stretch,
+      $flex-wrap: wrap
+    );
+
+    > li {
+      @include width(30%);
+      @include flex;
+
+      a {
+        @include width;
+        @include bordered-box;
+        @include flex;
+      }
+
+      a:hover {
+        @include border($border-color: $green-color);
+        color: $green-color;
+      }
+    }
+
+    @include media-querie($max: $mobile-l) {
+      > li {
+        @include width(45%);
+      }
+    }
+  }
+
+  > div {
+    @include width;
+
+    p {
+      font-size: 2rem;
+      @extend %bold;
+    }
+  }
+}
+
+/* Formularios de acciones */
+.form {
+  @include width(var(--form-width));
+  @include flex($flex-direction: column, $align-items: start, $gap: 0.5rem);
+
+  &.login {
+    @include width(var(--login-form-width));
+
+    > form button {
+      @include btn(100%);
+    }
+  }
+
+  > form {
+    @include width;
+    @include bordered-box(
+      $border-radius: $default-border-radius,
+      $padding: $default-gap
+    );
+    @include flex($flex-direction: column);
+
+    > div {
+      @include width;
+      @include flex($text-align: start);
+
+      label {
+        @include width;
+      }
+
+      input,
+      select {
+        @include width;
+        @include bordered-box;
+        @include color($background: $white-color);
+      }
+
+      select {
+        cursor: pointer;
+      }
+    }
+
+    button:not(.login > form button):not(.react-datepicker-popper button) {
+      @include btn(50%);
+    }
+
+    @include media-querie($max: $mobile-l) {
+      button:not(.login > form button):not(.react-datepicker-popper button) {
+        @include btn(100%);
+      }
+    }
+  }
+
+  > div {
+    @include width;
+
+    p {
+      font-size: 2rem;
+      @extend %bold;
+    }
+  }
+}
+
+/* Ficha de información */
+.info {
+  @include width;
+  @include flex($flex-direction: column);
+
+  > article {
+    @include width;
+    @include flex($flex-direction: column);
+
+    .img {
+      @include width(var(--info-width));
+
+      > img {
+        @include width;
+        @include bordered-box(
+          $border-radius: $default-border-radius,
+          $padding: 0
+        );
+        object-fit: contain;
+      }
+    }
+
+    .data {
+      @include width(var(--info-width));
+      @include bordered-box(
+        $border-radius: $default-border-radius,
+        $padding: $default-gap
+      );
+      @include flex($flex-direction: column);
+
+      > div {
+        @include width;
+        @include flex;
+
+        > div {
+          @include width(50%);
+
+          &:first-child {
+            @extend %bold;
+            @include flex($justify-content: end, $text-align: right);
+          }
+
+          &:last-child {
+            @include flex($justify-content: start, $text-align: left);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Mensajes emergentes de SweetAlert2 */
+.swal2-popup {
+  @include border($border-width: 0.25rem);
+  background-color: $background-color;
+
+  .swal2-title {
+    @include color;
+  }
+
+  .swal2-actions {
+    background-color: $background-color;
+    gap: $default-gap;
+
+    .swal2-confirm,
+    .swal2-cancel {
+      @include btn;
+
+      &:focus-within,
+      &:focus-within {
+        @include outline;
+      }
+    }
+  }
+
+  /* Loader */
+  .swal2-loader {
+    @include square(7rem);
+    @include bordered-box(0.35rem, transparent, 50%, 0);
+    border-top-color: $front-color;
+    position: relative;
+    @include animation($animation-name: $spin-animation-name);
+
+    &::before,
+    &::after {
+      content: '';
+      @include bordered-box(0.35rem, transparent, 50%, 0);
+      position: absolute;
+    }
+
+    &::before {
+      inset: 0.5rem;
+      border-top-color: $green-color;
+      @include animation(
+        $animation-name: $spin-animation-name,
+        $animation-duration: 2s
+      );
+    }
+
+    &::after {
+      inset: 1.5rem;
+      border-top-color: $green2-color;
+      @include animation(
+        $animation-name: $spin-animation-name,
+        $animation-duration: 3s,
+        $animation-direction: reverse
+      );
+    }
+
+    @keyframes #{$spin-animation-name} {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

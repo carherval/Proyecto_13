@@ -5,11 +5,12 @@ import strings from '../../utils/strings'
 
 // Componente que muestra una lista de clientes
 const CustomerList = ({ customers }) => (
-  <ul className='flex personajes'>
+  <ul>
     {[...customers].map((customer) => (
-      <li key={customer._id} className='flex'>
+      <li key={customer._id}>
         <Link
           to={`/${MENU_OPTIONS.customers.id}/${strings.CUSTOMER_ACTIONS.info.id}`}
+          title={strings.CUSTOMER_ACTIONS.info.label}
           state={{ id: customer._id }}
         >
           {helpers.getCustomerFullName(customer)}

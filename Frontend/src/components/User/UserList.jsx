@@ -5,11 +5,12 @@ import strings from '../../utils/strings'
 
 // Componente que muestra una lista de usuarios
 const UserList = ({ users }) => (
-  <ul className='flex personajes'>
+  <ul>
     {[...users].map((user) => (
-      <li key={user._id} className='flex'>
+      <li key={user._id}>
         <Link
           to={`/${MENU_OPTIONS.users.id}/${strings.USER_ACTIONS.info.id}`}
+          title={strings.USER_ACTIONS.info.label}
           state={{ id: user._id }}
         >
           {helpers.getUserFullName(user)}

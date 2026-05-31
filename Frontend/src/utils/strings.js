@@ -2,7 +2,6 @@ const PAGE_TITLE = 'Concesionario thePower'
 const AUTHOR_FULLNAME = 'Carlos Hernández'
 
 const MANDATORY_FIELDS_MSG = 'Campos obligatorios'
-const FILE_NOT_SELECTED_MSG = 'Ningún archivo seleccionado'
 const CARS_NOT_FOUND_MSG = 'No se han encontrado coches'
 const CUSTOMERS_NOT_FOUND_MSG = 'No se han encontrado clientes'
 const AVAILABLE_CARS_CUSTOMERS_NOT_FOUND_MSG =
@@ -135,6 +134,10 @@ const CUSTOMER_USER_FIELDS = {
   email: { id: 'email', label: 'Correo electrónico' }
 }
 
+const CUSTOMER_USER_ACTIONS = {
+  email: { id: 'email', label: 'Enviar correo electrónico a' }
+}
+
 const CUSTOMER_ACTIONS = {
   create: { id: 'create', label: 'Crear cliente' },
   info: { id: 'info', label: 'Información del cliente' },
@@ -220,7 +223,6 @@ const strings = {
   PAGE_TITLE,
   AUTHOR_FULLNAME,
   MANDATORY_FIELDS_MSG,
-  FILE_NOT_SELECTED_MSG,
   CARS_NOT_FOUND_MSG,
   CUSTOMERS_NOT_FOUND_MSG,
   AVAILABLE_CARS_CUSTOMERS_NOT_FOUND_MSG,
@@ -242,6 +244,7 @@ const strings = {
   CAR_FIELDS,
   CAR_ACTIONS,
   CUSTOMER_USER_FIELDS,
+  CUSTOMER_USER_ACTIONS,
   CUSTOMER_ACTIONS,
   RESERVATION_SALE_FIELDS,
   RESERVATION_FIELDS,

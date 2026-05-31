@@ -46,26 +46,36 @@ const Users = () => {
     <>
       <h2>{MENU_OPTIONS.users.label}</h2>
 
-      <Link to={`/${MENU_OPTIONS.users.id}/${strings.USER_ACTIONS.create.id}`}>
-        {strings.USER_ACTIONS.create.label}
-      </Link>
+      <section className='btn-box'>
+        <div>
+          <Link
+            to={`/${MENU_OPTIONS.users.id}/${strings.USER_ACTIONS.create.id}`}
+          >
+            {strings.USER_ACTIONS.create.label}
+          </Link>
+        </div>
+      </section>
 
       {data.length > 0 ? (
         <>
           <UserFilter getFilteredUsers={getFilteredUsers} />
 
-          {filteredUsers.length > 0 ? (
-            <UserList users={filteredUsers} />
-          ) : (
-            <div className='flex'>
-              <p>{strings.USERS_NOT_FOUND_MSG}</p>
-            </div>
-          )}
+          <section className='results'>
+            {filteredUsers.length > 0 ? (
+              <UserList users={filteredUsers} />
+            ) : (
+              <div>
+                <p>{strings.USERS_NOT_FOUND_MSG}</p>
+              </div>
+            )}
+          </section>
         </>
       ) : (
-        <div className='flex'>
-          <p>{strings.USERS_NOT_FOUND_MSG}</p>
-        </div>
+        <section className='results'>
+          <div>
+            <p>{strings.USERS_NOT_FOUND_MSG}</p>
+          </div>
+        </section>
       )}
     </>
   )

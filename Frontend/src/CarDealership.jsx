@@ -5,7 +5,7 @@ const CarDealership = () => (
   <>
     <Header isLogin={useLocation().pathname === '/'} />
 
-    <main className='flex contenido'>
+    <main className='content'>
       <Outlet />
     </main>
   </>

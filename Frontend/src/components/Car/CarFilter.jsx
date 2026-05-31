@@ -14,9 +14,11 @@ const CarFilter = React.memo(({ getFilteredCars }) => {
   const { register } = useFilter(INITIAL_CAR_FILTER_VALUES, getFilteredCars)
 
   return (
-    <form className='flex' onSubmit={(event) => event.preventDefault()}>
-      <CarFilterForm register={register} />
-    </form>
+    <section className='search'>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <CarFilterForm register={register} />
+      </form>
+    </section>
   )
 })
 

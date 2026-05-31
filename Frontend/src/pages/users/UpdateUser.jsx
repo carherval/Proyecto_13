@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Navigate, useLocation } from 'react-router-dom'
 import { AuthContext } from '../../components/Auth/AuthProvider'
+import RequiredNote from '../../components/Form/RequiredNote'
 import { MENU_OPTIONS } from '../../components/Menu/Menu'
 import UserForm from '../../components/User/UserForm'
 import useFetchWithDialog from '../../hooks/useFetchWithDialog'
@@ -69,9 +70,12 @@ const UpdateUser = () => {
       <h2>{strings.USER_ACTIONS.update.label}</h2>
 
       {data != null && (
-        <form onSubmit={handleSubmit(submit)}>
-          <UserForm register={register} action={action} />
-        </form>
+        <section className='form'>
+          <RequiredNote />
+          <form onSubmit={handleSubmit(submit)}>
+            <UserForm register={register} action={action} />
+          </form>
+        </section>
       )}
     </>
   )

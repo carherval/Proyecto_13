@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import RequiredNote from '../../components/Form/RequiredNote'
 import ReservationSaleForm from '../../components/ReservationSale/ReservationSaleForm'
 import useDialog from '../../hooks/useDialog'
 import useFetchWithDialog from '../../hooks/useFetchWithDialog'
@@ -58,20 +59,25 @@ const CreateReservation = () => {
     <>
       <h2>{strings.RESERVATION_ACTIONS.create.label}</h2>
 
-      {availableCars.length > 0 && customers.length > 0 ? (
-        <form onSubmit={handleSubmit(submit)}>
-          <ReservationSaleForm
-            control={control}
-            cars={availableCars}
-            customers={customers}
-            action={strings.RESERVATION_ACTIONS.create}
-          />
-        </form>
-      ) : (
-        <div className='flex'>
-          <p>{strings.AVAILABLE_CARS_CUSTOMERS_NOT_FOUND_MSG}</p>
-        </div>
-      )}
+      <section className='form'>
+        {availableCars.length > 0 && customers.length > 0 ? (
+          <>
+            <RequiredNote />
+            <form onSubmit={handleSubmit(submit)}>
+              <ReservationSaleForm
+                control={control}
+                cars={availableCars}
+                customers={customers}
+                action={strings.RESERVATION_ACTIONS.create}
+              />
+            </form>
+          </>
+        ) : (
+          <div>
+            <p>{strings.AVAILABLE_CARS_CUSTOMERS_NOT_FOUND_MSG}</p>
+          </div>
+        )}
+      </section>
     </>
   )
 }

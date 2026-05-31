@@ -45,10 +45,14 @@ const getFormData = (body) => {
   const formData = new FormData()
 
   Object.keys(body).forEach((key) =>
-    // Campo del formulario de tipo "file"
+    // Campo del formulario de selección de archivo
     key === strings.CAR_FIELDS.img.id
       ? body[key]?.[0] != null && formData.append(key, body[key][0])
-      : formData.append(key, body[key])
+      : // Campo del formulario de selección de fecha mediante un calendario
+        key === strings.CAR_FIELDS.purchaseDate.id &&
+          body[key].toString().trim() !== ''
+        ? formData.append(key, getFormattedDate(body[key]))
+        : formData.append(key, body[key])
   )
 
   return formData
@@ -61,16 +65,27 @@ const getCarDescr = (
 ) =>
   `${car.make} ${car.model}${showCarLicensePlate ? ' (' + (reverseCarLicensePlate ? car.licensePlate.slice(4) + car.licensePlate.slice(0, 4) : car.licensePlate) + ')' : ''}`
 
-const getCustomerFullName = (customer) =>
-  `${customer.surnames}, ${customer.name}`
+const getCustomerFullName = (customer, naturalFormat = false) =>
+  naturalFormat
+    ? `${customer.name} ${customer.surnames}`
+    : `${customer.surnames}, ${customer.name}`
 
-const getCarDescrWithCustomerFullName = (car, customer, reverseData = false) =>
+const getCarDescrWithCustomerFullName = (
+  car,
+  customer,
+  { customerNaturalFormat = false, reverseData = false } = {}
+) =>
   reverseData
-    ? `${getCustomerFullName(customer)} - ${getCarDescr(car)}`
-    : `${getCarDescr(car)} - ${getCustomerFullName(customer)}`
+    ? `${getCustomerFullName(customer, customerNaturalFormat)} - ${getCarDescr(car)}`
+    : `${getCarDescr(car)} - ${getCustomerFullName(customer, customerNaturalFormat)}`
 
-const getUserFullName = (user, showUserName = true) =>
-  `${user.surnames}, ${user.name}${showUserName ? ' (' + user.username + ')' : ''}`
+const getUserFullName = (
+  user,
+  { showUserName = true, naturalFormat = false } = {}
+) =>
+  naturalFormat
+    ? `${user.name} ${user.surnames}${showUserName ? ' (' + user.username + ')' : ''}`
+    : `${user.surnames}, ${user.name}${showUserName ? ' (' + user.username + ')' : ''}`
 
 const getFormattedDate = (date, format = 'DD/MM/YYYY') =>
   moment(date).format(format)
@@ -205,6 +220,17 @@ const handleAction = async (
   }
 }
 
+// Comprueba si una imagen se carga correctamente
+const isImageLoaded = (src) =>
+  new Promise((resolve) => {
+    const img = new Image()
+
+    img.src = src
+
+    img.onload = () => resolve(true)
+    img.onerror = () => resolve(false)
+  })
+
 const helpers = {
   EXPIRATION_TIME,
   MIN_YEAR,
@@ -234,7 +260,8 @@ const helpers = {
   sortEntities,
   includesIgnoreCase,
   selfNavigate,
-  handleAction
+  handleAction,
+  isImageLoaded
 }
 
 export default helpers

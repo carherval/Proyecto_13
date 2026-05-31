@@ -67,9 +67,15 @@ const Sales = () => {
     <>
       <h2>{MENU_OPTIONS.sales.label}</h2>
 
-      <Link to={`/${MENU_OPTIONS.sales.id}/${strings.SALE_ACTIONS.create.id}`}>
-        {strings.SALE_ACTIONS.create.label}
-      </Link>
+      <section className='btn-box'>
+        <div>
+          <Link
+            to={`/${MENU_OPTIONS.sales.id}/${strings.SALE_ACTIONS.create.id}`}
+          >
+            {strings.SALE_ACTIONS.create.label}
+          </Link>
+        </div>
+      </section>
 
       {data.length > 0 ? (
         <>
@@ -77,21 +83,25 @@ const Sales = () => {
             getFilteredReservationsSales={getFilteredSales}
           />
 
-          {filteredSales.length > 0 ? (
-            <ReservationSaleList
-              reservationsSales={filteredSales}
-              order={order}
-            />
-          ) : (
-            <div className='flex'>
-              <p>{strings.SALES_NOT_FOUND_MSG}</p>
-            </div>
-          )}
+          <section className='results'>
+            {filteredSales.length > 0 ? (
+              <ReservationSaleList
+                reservationsSales={filteredSales}
+                order={order}
+              />
+            ) : (
+              <div>
+                <p>{strings.SALES_NOT_FOUND_MSG}</p>
+              </div>
+            )}
+          </section>
         </>
       ) : (
-        <div className='flex'>
-          <p>{strings.SALES_NOT_FOUND_MSG}</p>
-        </div>
+        <section className='results'>
+          <div>
+            <p>{strings.SALES_NOT_FOUND_MSG}</p>
+          </div>
+        </section>
       )}
     </>
   )

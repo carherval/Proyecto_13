@@ -23,59 +23,82 @@ const UserData = ({ user }) => {
 
   return (
     <>
-      {/* El usuario "superadmin" no se puede actualizar */}
+      {/* El usuario "superadmin" no se puede actualizar ni eliminar */}
       {!helpers.isSuperadminUser(user) && (
-        <>
-          <Link
-            to={`/${MENU_OPTIONS.users.id}/${strings.USER_ACTIONS.update.id}`}
-            state={{ id: user._id, action: strings.USER_ACTIONS.updateData.id }}
-          >
-            {strings.USER_ACTIONS.updateData.label}
-          </Link>
+        <section className='btn-box'>
+          <div>
+            <Link
+              to={`/${MENU_OPTIONS.users.id}/${strings.USER_ACTIONS.update.id}`}
+              state={{
+                id: user._id,
+                action: strings.USER_ACTIONS.updateData.id
+              }}
+            >
+              {strings.USER_ACTIONS.updateData.label}
+            </Link>
 
-          <Link
-            to={`/${MENU_OPTIONS.users.id}/${strings.USER_ACTIONS.update.id}`}
-            state={{
-              id: user._id,
-              action: strings.USER_ACTIONS.updatePassword.id
-            }}
-          >
-            {strings.USER_ACTIONS.updatePassword.label}
-          </Link>
-        </>
+            <Link
+              to={`/${MENU_OPTIONS.users.id}/${strings.USER_ACTIONS.update.id}`}
+              state={{
+                id: user._id,
+                action: strings.USER_ACTIONS.updatePassword.id
+              }}
+            >
+              {strings.USER_ACTIONS.updatePassword.label}
+            </Link>
+
+            {/* Un usuario no se puede eliminar a sí mismo*/}
+            {!helpers.isMyself(user._id) && (
+              <button
+                type={strings.INPUT_FIELD_TYPES.button}
+                onClick={() =>
+                  showConfirmDialog(
+                    strings.ACTION_CONFIRM_MSG,
+                    handleDeleteUserById
+                  )
+                }
+              >
+                {strings.USER_ACTIONS.delete.label}
+              </button>
+            )}
+          </div>
+        </section>
       )}
 
-      {/* El usuario "superadmin" no se puede eliminar y un usuario no se puede eliminar a sí mismo*/}
-      {!helpers.isSuperadminUser(user) && !helpers.isMyself(user._id) && (
-        <button
-          type={strings.INPUT_FIELD_TYPES.button}
-          onClick={() =>
-            showConfirmDialog(strings.ACTION_CONFIRM_MSG, handleDeleteUserById)
-          }
-        >
-          {strings.USER_ACTIONS.delete.label}
-        </button>
-      )}
+      <section className='info'>
+        <article>
+          <h3>
+            {helpers.getUserFullName(user, {
+              showUserName: false,
+              naturalFormat: true
+            })}
+          </h3>
 
-      <div>
-        {strings.CUSTOMER_USER_FIELDS.surnames.label}: {user.surnames}
-      </div>
+          <div className='data'>
+            <div>
+              <div>{strings.USER_FIELDS.username.label}</div>
+              <div>{user.username}</div>
+            </div>
 
-      <div>
-        {strings.CUSTOMER_USER_FIELDS.name.label}: {user.name}
-      </div>
+            <div>
+              <div>{strings.CUSTOMER_USER_FIELDS.email.label}</div>
+              <div>
+                <Link
+                  to={`mailto:${user.email}`}
+                  title={`${strings.CUSTOMER_USER_ACTIONS.email.label} ${helpers.getUserFullName(user, { showUserName: false, naturalFormat: true })}`}
+                >
+                  {user.email}
+                </Link>
+              </div>
+            </div>
 
-      <div>
-        {strings.USER_FIELDS.username.label}: {user.username}
-      </div>
-
-      <div>
-        {strings.CUSTOMER_USER_FIELDS.email.label}: {user.email}
-      </div>
-
-      <div>
-        {strings.USER_FIELDS.role.label}: {user.role}
-      </div>
+            <div>
+              <div>{strings.USER_FIELDS.role.label}</div>
+              <div>{user.role}</div>
+            </div>
+          </div>
+        </article>
+      </section>
     </>
   )
 }

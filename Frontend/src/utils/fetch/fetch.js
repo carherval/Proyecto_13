@@ -24,8 +24,10 @@ const MESSAGES = [
   { original: 'endpoint', new: SERVER_NOT_RESPONSE_MSG },
   { original: 'buffering', new: SERVER_NOT_RESPONSE_MSG },
   { original: 'timed out', new: SERVER_NOT_RESPONSE_MSG },
-  { original: 'ETIMEDOUT', new: SERVER_NOT_RESPONSE_MSG },
-  { original: 'getaddrinfo ENOTFOUND', new: SERVER_NOT_RESPONSE_MSG },
+  { original: 'etimedout', new: SERVER_NOT_RESPONSE_MSG },
+  { original: 'etimeout', new: SERVER_NOT_RESPONSE_MSG },
+  { original: 'getaddrinfo enotfound', new: SERVER_NOT_RESPONSE_MSG },
+  { original: 'closed', new: SERVER_NOT_RESPONSE_MSG },
   { original: 'url', new: BAD_REQUEST_MSG }
 ]
 

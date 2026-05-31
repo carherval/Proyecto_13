@@ -1,0 +1,38 @@
+.header {
+  height: #{$header-height}rem;
+  padding: 0 $default-gap 0;
+  background-color: $background-color;
+  @include flex($flex-direction: column);
+
+  h1 {
+    @include flex;
+
+    * {
+      font-size: 3rem;
+    }
+
+    &:has(+ .menu) * {
+      font-size: 2rem;
+    }
+
+    a {
+      color: $front-color;
+    }
+
+    a::after {
+      content: '';
+      display: inline-block;
+      @include square(5rem);
+      margin-left: 1rem;
+      background-image: url('/images/logo.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      vertical-align: middle;
+    }
+
+    &:has(+ .menu) a::after {
+      @include square(2.5rem);
+    }
+  }
+}

@@ -1,3 +1,7 @@
+import './Form.scss'
+
+import { getRequiredStar } from './RequiredNote'
+
 // Componente que devuelve un campo de texto que sólo admite números y que elimina los ceros innecesarios a la izquierda
 const NumberField = ({
   id,
@@ -15,6 +19,7 @@ const NumberField = ({
           ? `${placeholder}${isRequired && label == null ? ' *' : ''}`
           : undefined
       }
+      title={placeholder ?? undefined}
       maxLength={maxLength ?? undefined}
       {...register(id, {
         onChange: (event) =>
@@ -27,8 +32,8 @@ const NumberField = ({
 
   return label != null ? (
     <label>
-      {label}
-      {isRequired && <span className='required'>*</span>}:{getInput()}
+      {label} {isRequired && getRequiredStar()}
+      {getInput()}
     </label>
   ) : (
     getInput()

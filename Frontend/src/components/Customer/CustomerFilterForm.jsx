@@ -6,8 +6,7 @@ const CustomerFilterForm = ({ register }) => (
   <div>
     <TextField
       id={strings.RESERVATION_SALE_FIELDS.customer.id}
-      label={strings.RESERVATION_SALE_FIELDS.customer.label}
-      placeholder={`${strings.CUSTOMER_USER_FIELDS.surnames.label}, ${strings.CUSTOMER_USER_FIELDS.name.label}, ${strings.CUSTOMER_USER_FIELDS.email.label}`}
+      placeholder={`${strings.CUSTOMER_USER_FIELDS.surnames.label}, ${strings.CUSTOMER_USER_FIELDS.name.label}, ${strings.CUSTOMER_USER_FIELDS.email.label} del ${strings.RESERVATION_SALE_FIELDS.customer.label.toLowerCase()}`}
       register={register}
       isRequired={false}
     />

@@ -64,11 +64,10 @@ const CarForm = ({ register, control, watch, car }) => {
       <div>
         <FileField
           id={strings.CAR_FIELDS.img.id}
-          label={strings.CAR_FIELDS.img.label}
           fileName={
             img != null && img.length > 0
               ? img[0].name
-              : strings.FILE_NOT_SELECTED_MSG
+              : `${strings.CAR_FIELDS.img.label} del ${strings.RESERVATION_SALE_FIELDS.car.label.toLowerCase()}`
           }
           register={register}
         />
@@ -101,18 +100,18 @@ const CarForm = ({ register, control, watch, car }) => {
               register={register}
             />
           </div>
-        </>
-      )}
 
-      {/* Si se crea un coche con la condición "Nuevo" el kilometraje siempre es 0 */}
-      {car == null && condition === strings.CAR_CONDITIONS.used && (
-        <div>
-          <NumberField
-            id={strings.CAR_FIELDS.mileage.id}
-            label={strings.CAR_FIELDS.mileage.label}
-            register={register}
-          />
-        </div>
+          {/* Si se crea un coche con la condición "Nuevo" el kilometraje siempre es 0 */}
+          {condition === strings.CAR_CONDITIONS.used && (
+            <div>
+              <NumberField
+                id={strings.CAR_FIELDS.mileage.id}
+                label={strings.CAR_FIELDS.mileage.label}
+                register={register}
+              />
+            </div>
+          )}
+        </>
       )}
 
       {(car == null || car.status === strings.CAR_STATUSES.available) && (

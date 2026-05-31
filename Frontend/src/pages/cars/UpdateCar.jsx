@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Navigate, useLocation } from 'react-router-dom'
 import CarForm from '../../components/Car/CarForm'
+import RequiredNote from '../../components/Form/RequiredNote'
 import { MENU_OPTIONS } from '../../components/Menu/Menu'
 import useFetchWithDialog from '../../hooks/useFetchWithDialog'
 import carFetch from '../../utils/fetch/car'
@@ -50,14 +51,17 @@ const UpdateCar = () => {
       <h2>{strings.CAR_ACTIONS.update.label}</h2>
 
       {data != null && (
-        <form onSubmit={handleSubmit(submit)}>
-          <CarForm
-            register={register}
-            control={control}
-            watch={watch}
-            car={data}
-          />
-        </form>
+        <section className='form'>
+          <RequiredNote />
+          <form onSubmit={handleSubmit(submit)}>
+            <CarForm
+              register={register}
+              control={control}
+              watch={watch}
+              car={data}
+            />
+          </form>
+        </section>
       )}
     </>
   )

@@ -1,4 +1,4 @@
-import './Menu.css'
+import './Menu.scss'
 
 import { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
@@ -23,28 +23,36 @@ const Menu = () => {
   const { showConfirmDialog } = useDialog()
 
   return (
-    <div className='flex menu'>
+    <div className='menu'>
       {/*Saludo (perfil del usuario) y cerrar sesión*/}
-      <div>
-        Hola,{' '}
-        <Link to={`/${MENU_OPTIONS.users.id}/profile`} state={{ id: user._id }}>
-          {user.name}
-        </Link>{' '}
-        (
+      <div className='greeting'>
+        <span>
+          Hola,{' '}
+          <Link
+            to={`/${MENU_OPTIONS.users.id}/profile`}
+            title={strings.USER_ACTIONS.profile.label}
+            state={{ id: user._id }}
+          >
+            {user.name}
+          </Link>
+        </span>
         <Link
+          title={MENU_OPTIONS.logout.label}
           onClick={(event) => {
             event.preventDefault()
             showConfirmDialog(strings.LOGOUT_CONFIRM_MSG, logout)
           }}
         >
-          {MENU_OPTIONS.logout.label}
+          <img
+            src={`/images/${MENU_OPTIONS.logout.id}.png`}
+            alt={MENU_OPTIONS.logout.label}
+          />
         </Link>
-        )
       </div>
 
       {/*Secciones de navegación*/}
       <nav>
-        <ul className='flex'>
+        <ul>
           {Object.values(MENU_SECTIONS).map(
             (section) =>
               // La sección "Usuarios" sólo es visible para usuarios "admin"
@@ -57,8 +65,13 @@ const Menu = () => {
                       isActive ? 'active' : undefined
                     }
                     to={section.id}
+                    title={section.label}
                   >
-                    {section.label}
+                    <span>{section.label}</span>
+                    <img
+                      src={`/images/${section.id}.png`}
+                      alt={section.label}
+                    />
                   </NavLink>
                 </li>
               )

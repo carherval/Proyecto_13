@@ -1,3 +1,6 @@
+import './Form.scss'
+
+import { getRequiredStar } from './RequiredNote'
 import strings from '../../utils/strings'
 
 // Componente que devuelve un campo de texto y de contraseña
@@ -18,6 +21,7 @@ const TextField = ({
           ? `${placeholder}${isRequired && label == null ? ' *' : ''}`
           : undefined
       }
+      title={placeholder ?? undefined}
       maxLength={maxLength ?? undefined}
       autoComplete={
         type === strings.INPUT_FIELD_TYPES.password ? 'off' : undefined
@@ -28,8 +32,8 @@ const TextField = ({
 
   return label != null ? (
     <label>
-      {label}
-      {isRequired && <span className='required'>*</span>}:{getInput()}
+      {label} {isRequired && getRequiredStar()}
+      {getInput()}
     </label>
   ) : (
     getInput()

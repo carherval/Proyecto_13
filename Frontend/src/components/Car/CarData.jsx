@@ -27,72 +27,85 @@ const CarData = ({ car }) => {
   return (
     <>
       {helpers.isAdminUser(user) && (
-        <Link
-          to={`/${MENU_OPTIONS.cars.id}/${strings.CAR_ACTIONS.update.id}`}
-          state={{ id: car._id }}
-        >
-          {strings.CAR_ACTIONS.update.label}
-        </Link>
+        <section className='btn-box'>
+          <div>
+            <Link
+              to={`/${MENU_OPTIONS.cars.id}/${strings.CAR_ACTIONS.update.id}`}
+              state={{ id: car._id }}
+            >
+              {strings.CAR_ACTIONS.update.label}
+            </Link>
+
+            {/* No se puede eliminar un coche que no está disponible */}
+            {car.status === strings.CAR_STATUSES.available && (
+              <button
+                type={strings.INPUT_FIELD_TYPES.button}
+                onClick={() =>
+                  showConfirmDialog(
+                    strings.ACTION_CONFIRM_MSG,
+                    handleDeleteCarById
+                  )
+                }
+              >
+                {strings.CAR_ACTIONS.delete.label}
+              </button>
+            )}
+          </div>
+        </section>
       )}
 
-      {/* No se puede eliminar un coche que no está disponible */}
-      {helpers.isAdminUser(user) &&
-        car.status === strings.CAR_STATUSES.available && (
-          <button
-            type={strings.INPUT_FIELD_TYPES.button}
-            onClick={() =>
-              showConfirmDialog(strings.ACTION_CONFIRM_MSG, handleDeleteCarById)
-            }
-          >
-            {strings.CAR_ACTIONS.delete.label}
-          </button>
-        )}
+      <section className='info'>
+        <article>
+          <h3>{helpers.getCarDescr(car)}</h3>
 
-      <div>
-        {strings.CAR_FIELDS.licensePlate.label}: {car.licensePlate}
-      </div>
+          {car.img !== '' && (
+            <div className='img'>
+              <img src={`${car.img}`} alt={helpers.getCarDescr(car)} />
+            </div>
+          )}
 
-      <div>
-        {strings.CAR_FIELDS.make.label}: {car.make}
-      </div>
+          <div className='data'>
+            <div>
+              <div>{strings.CAR_FIELDS.color.label}</div>
+              <div>{car.color}</div>
+            </div>
 
-      <div>
-        {strings.CAR_FIELDS.model.label}: {car.model}
-      </div>
+            <div>
+              <div>{strings.CAR_FIELDS.modelYear.label}</div>
+              <div>{car.modelYear}</div>
+            </div>
 
-      <div>
-        {strings.CAR_FIELDS.color.label}: {car.color}
-      </div>
+            <div>
+              <div>{strings.CAR_FIELDS.purchaseDate.label}</div>
+              <div>{helpers.getFormattedDate(car.purchaseDate)}</div>
+            </div>
 
-      <div>
-        {strings.CAR_FIELDS.modelYear.label}: {car.modelYear}
-      </div>
+            <div>
+              <div>{strings.CAR_FIELDS.condition.label}</div>
+              <div>{car.condition}</div>
+            </div>
 
-      {car.img !== '' && (
-        <div>
-          <img src={`${car.img}`} />
-        </div>
-      )}
+            <div>
+              <div>{strings.CAR_FIELDS.mileage.label}</div>
+              <div>
+                {`${helpers.getFormattedNumber(car.mileage)} ${strings.CAR_FIELDS.mileage.unit}`}
+              </div>
+            </div>
 
-      <div>
-        {`${strings.CAR_FIELDS.purchaseDate.label}: ${helpers.getFormattedDate(car.purchaseDate)}`}
-      </div>
+            <div>
+              <div>{strings.CAR_FIELDS.price.label}</div>
+              <div>
+                {`${helpers.getFormattedNumber(car.price)} ${strings.CAR_FIELDS.price.unit}`}
+              </div>
+            </div>
 
-      <div>
-        {strings.CAR_FIELDS.condition.label}: {car.condition}
-      </div>
-
-      <div>
-        {`${strings.CAR_FIELDS.mileage.label}: ${helpers.getFormattedNumber(car.mileage)} ${strings.CAR_FIELDS.mileage.unit}`}
-      </div>
-
-      <div>
-        {`${strings.CAR_FIELDS.price.label}: ${helpers.getFormattedNumber(car.price)} ${strings.CAR_FIELDS.price.unit}`}
-      </div>
-
-      <div>
-        {strings.CAR_FIELDS.status.label}: {car.status}
-      </div>
+            <div>
+              <div>{strings.CAR_FIELDS.status.label}</div>
+              <div>{car.status}</div>
+            </div>
+          </div>
+        </article>
+      </section>
     </>
   )
 }

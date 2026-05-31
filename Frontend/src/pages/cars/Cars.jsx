@@ -51,30 +51,37 @@ const Cars = () => {
       <h2>{MENU_OPTIONS.cars.label}</h2>
 
       {helpers.isAdminUser(user) && (
-        <Link
-          className='btn-lnk'
-          to={`/${MENU_OPTIONS.cars.id}/${strings.CAR_ACTIONS.create.id}`}
-        >
-          {strings.CAR_ACTIONS.create.label}
-        </Link>
+        <section className='btn-box'>
+          <div>
+            <Link
+              to={`/${MENU_OPTIONS.cars.id}/${strings.CAR_ACTIONS.create.id}`}
+            >
+              {strings.CAR_ACTIONS.create.label}
+            </Link>
+          </div>
+        </section>
       )}
 
       {data.length > 0 ? (
         <>
           <CarFilter getFilteredCars={getFilteredCars} />
 
-          {filteredCars.length > 0 ? (
-            <CarList cars={filteredCars} />
-          ) : (
-            <div className='flex'>
-              <p>{strings.CARS_NOT_FOUND_MSG}</p>
-            </div>
-          )}
+          <section className='results'>
+            {filteredCars.length > 0 ? (
+              <CarList cars={filteredCars} />
+            ) : (
+              <div>
+                <p>{strings.CARS_NOT_FOUND_MSG}</p>
+              </div>
+            )}
+          </section>
         </>
       ) : (
-        <div className='flex'>
-          <p>{strings.CARS_NOT_FOUND_MSG}</p>
-        </div>
+        <section className='results'>
+          <div>
+            <p>{strings.CARS_NOT_FOUND_MSG}</p>
+          </div>
+        </section>
       )}
     </>
   )

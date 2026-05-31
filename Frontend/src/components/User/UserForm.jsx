@@ -52,27 +52,28 @@ const UserForm = ({ register, action }) => {
       )}
 
       {(action == null || action === strings.USER_ACTIONS.updateData.id) && (
-        <div>
-          <TextField
-            id={strings.CUSTOMER_USER_FIELDS.email.id}
-            label={strings.CUSTOMER_USER_FIELDS.email.label}
-            register={register}
-          />
-        </div>
-      )}
-
-      {/* El rol sólo puede ser actualizado por un usuario "admin" */}
-      {(action == null || action === strings.USER_ACTIONS.updateData.id) &&
-        helpers.isAdminUser(user) && (
+        <>
           <div>
-            <SelectField
-              id={strings.USER_FIELDS.role.id}
-              label={strings.USER_FIELDS.role.label}
-              options={Object.keys(strings.ALLOWED_ROLES)}
+            <TextField
+              id={strings.CUSTOMER_USER_FIELDS.email.id}
+              label={strings.CUSTOMER_USER_FIELDS.email.label}
               register={register}
             />
           </div>
-        )}
+
+          {/* El rol sólo puede ser actualizado por un usuario "admin" */}
+          {helpers.isAdminUser(user) && (
+            <div>
+              <SelectField
+                id={strings.USER_FIELDS.role.id}
+                label={strings.USER_FIELDS.role.label}
+                options={Object.keys(strings.ALLOWED_ROLES)}
+                register={register}
+              />
+            </div>
+          )}
+        </>
+      )}
 
       <button type={strings.INPUT_FIELD_TYPES.submit}>
         {action == null

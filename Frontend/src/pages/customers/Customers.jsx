@@ -46,28 +46,36 @@ const Customers = () => {
     <>
       <h2>{MENU_OPTIONS.customers.label}</h2>
 
-      <Link
-        to={`/${MENU_OPTIONS.customers.id}/${strings.CUSTOMER_ACTIONS.create.id}`}
-      >
-        {strings.CUSTOMER_ACTIONS.create.label}
-      </Link>
+      <section className='btn-box'>
+        <div>
+          <Link
+            to={`/${MENU_OPTIONS.customers.id}/${strings.CUSTOMER_ACTIONS.create.id}`}
+          >
+            {strings.CUSTOMER_ACTIONS.create.label}
+          </Link>
+        </div>
+      </section>
 
       {data.length > 0 ? (
         <>
           <CustomerFilter getFilteredCustomers={getFilteredCustomers} />
 
-          {filteredCustomers.length > 0 ? (
-            <CustomerList customers={filteredCustomers} />
-          ) : (
-            <div className='flex'>
-              <p>{strings.CUSTOMERS_NOT_FOUND_MSG}</p>
-            </div>
-          )}
+          <section className='results'>
+            {filteredCustomers.length > 0 ? (
+              <CustomerList customers={filteredCustomers} />
+            ) : (
+              <div>
+                <p>{strings.CUSTOMERS_NOT_FOUND_MSG}</p>
+              </div>
+            )}
+          </section>
         </>
       ) : (
-        <div className='flex'>
-          <p>{strings.CUSTOMERS_NOT_FOUND_MSG}</p>
-        </div>
+        <section className='results'>
+          <div>
+            <p>{strings.CUSTOMERS_NOT_FOUND_MSG}</p>
+          </div>
+        </section>
       )}
     </>
   )

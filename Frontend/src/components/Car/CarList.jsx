@@ -5,11 +5,12 @@ import strings from '../../utils/strings'
 
 // Componente que muestra una lista de coches
 const CarList = ({ cars }) => (
-  <ul className='flex personajes'>
+  <ul>
     {[...cars].map((car) => (
-      <li key={car._id} className='flex'>
+      <li key={car._id}>
         <Link
           to={`/${MENU_OPTIONS.cars.id}/${strings.CAR_ACTIONS.info.id}`}
+          title={strings.CAR_ACTIONS.info.label}
           state={{ id: car._id }}
         >
           {helpers.getCarDescr(car)}

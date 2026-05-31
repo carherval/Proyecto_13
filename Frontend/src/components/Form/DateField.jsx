@@ -1,28 +1,36 @@
 import 'react-datepicker/dist/react-datepicker.css'
+import './Form.scss'
 
 import DatePicker from 'react-datepicker'
 import { Controller } from 'react-hook-form'
+import { getRequiredStar } from './RequiredNote'
 
 // Componente que devuelve un campo de selección de fecha mediante un calendario
-const DateField = ({ id, label, control }) => (
-  <label>
-    {label}
-    <span className='required'>*</span>:
-    <Controller
-      name={id}
-      control={control}
-      defaultValue=''
-      render={({ field }) => (
-        <DatePicker
-          className='input'
-          dateFormat='dd/MM/yyyy'
-          placeholderText='DD/MM/AAAA'
-          selected={field.value ?? ''}
-          onChange={(date) => field.onChange(date ?? '')}
-        />
-      )}
-    />
-  </label>
-)
+const DateField = ({ id, label, control }) => {
+  const placeholderText = 'DD/MM/AAAA'
+
+  return (
+    <label className='date'>
+      {label} {getRequiredStar()}
+      <Controller
+        name={id}
+        control={control}
+        defaultValue=''
+        render={({ field }) => (
+          <DatePicker
+            name={id}
+            dateFormat='dd/MM/yyyy'
+            placeholderText={placeholderText}
+            title={placeholderText}
+            autoComplete='off'
+            selected={field.value ?? ''}
+            onChange={(date) => field.onChange(date ?? '')}
+            onKeyDown={(event) => event.preventDefault()}
+          />
+        )}
+      />
+    </label>
+  )
+}
 
 export default DateField

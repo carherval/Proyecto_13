@@ -14,26 +14,27 @@ const UserFilter = React.memo(({ getFilteredUsers }) => {
   const { register } = useFilter(DEFAULT_USER_FILTER_VALUES, getFilteredUsers)
 
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      <div>
-        <TextField
-          id={strings.ENTITIES.user}
-          label={strings.OTHER_FILTER_OPTIONS.user.value}
-          placeholder={`${strings.CUSTOMER_USER_FIELDS.surnames.label}, ${strings.CUSTOMER_USER_FIELDS.name.label}, ${strings.USER_FIELDS.username.label}, ${strings.CUSTOMER_USER_FIELDS.email.label}`}
-          register={register}
-          isRequired={false}
-        />
-      </div>
+    <section className='search'>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <div>
+          <TextField
+            id={strings.ENTITIES.user}
+            placeholder={`${strings.CUSTOMER_USER_FIELDS.surnames.label}, ${strings.CUSTOMER_USER_FIELDS.name.label}, ${strings.USER_FIELDS.username.label}, ${strings.CUSTOMER_USER_FIELDS.email.label} del ${strings.OTHER_FILTER_OPTIONS.user.value.toLowerCase()}`}
+            register={register}
+            isRequired={false}
+          />
+        </div>
 
-      <div>
-        <RadioGroupField
-          id={strings.USER_FIELDS.role.id}
-          label={strings.USER_FIELDS.role.label}
-          options={strings.USER_ROLE_FILTER_OPTIONS}
-          register={register}
-        />
-      </div>
-    </form>
+        <div>
+          <RadioGroupField
+            id={strings.USER_FIELDS.role.id}
+            label={strings.USER_FIELDS.role.label}
+            options={strings.USER_ROLE_FILTER_OPTIONS}
+            register={register}
+          />
+        </div>
+      </form>
+    </section>
   )
 })
 

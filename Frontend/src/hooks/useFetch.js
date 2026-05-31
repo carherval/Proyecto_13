@@ -1,5 +1,6 @@
 import { useReducer } from 'react'
 import fetchReducer, { FETCH_ACTION_TYPES } from '../reducers/fetchReducer'
+import helpers from '../utils/helpers'
 
 const FETCH_INITIAL_STATE = {
   data: null,
@@ -21,6 +22,14 @@ const useFetch = (fetchCall) => {
     try {
       const res = await fetchCall(...fetchCallParams)
       const resData = await res.json()
+
+      // Se carga la imagen del coche, si existe
+      if (
+        resData?.data?.img != null &&
+        !(await helpers.isImageLoaded(resData.data.img))
+      ) {
+        resData.data.img = ''
+      }
 
       res.ok
         ? dispatchFetch({

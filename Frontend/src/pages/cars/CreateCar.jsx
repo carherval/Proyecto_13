@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import CarForm from '../../components/Car/CarForm'
+import RequiredNote from '../../components/Form/RequiredNote'
 import useFetchWithDialog from '../../hooks/useFetchWithDialog'
 import carFetch from '../../utils/fetch/car'
 import helpers from '../../utils/helpers'
@@ -26,9 +27,12 @@ const CreateCar = () => {
     <>
       <h2>{strings.CAR_ACTIONS.create.label}</h2>
 
-      <form onSubmit={handleSubmit(submit)}>
-        <CarForm register={register} control={control} watch={watch} />
-      </form>
+      <section className='form'>
+        <RequiredNote />
+        <form onSubmit={handleSubmit(submit)}>
+          <CarForm register={register} control={control} watch={watch} />
+        </form>
+      </section>
     </>
   )
 }

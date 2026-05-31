@@ -1,0 +1,88 @@
+.menu {
+  @include width;
+  @include flex($flex-direction: column);
+
+  img {
+    background-color: transparent;
+    filter: $front-color-filter;
+  }
+
+  .greeting {
+    @include flex($gap: 1rem);
+
+    img {
+      @include width(2rem);
+      vertical-align: middle;
+    }
+
+    a:hover img {
+      filter: $green-color-filter;
+    }
+  }
+
+  nav {
+    @include width(var(--menu-width));
+    background-color: $background-color;
+
+    ul {
+      @include bordered-box(
+        $border-radius: $default-border-radius,
+        $padding: 0
+      );
+      font-size: 1.75rem;
+      cursor: pointer;
+      @include flex($justify-content: space-between);
+
+      li {
+        background-color: transparent;
+
+        a {
+          @include bordered-box(
+            $border-color: transparent,
+            $border-radius: $default-border-radius,
+            $padding: 0.75rem
+          );
+          @include flex($gap: 1rem);
+
+          @include media-querie($max: $tablet - 1) {
+            span {
+              // @extend %fully-hidden;
+              display: none;
+            }
+          }
+
+          img {
+            @include width(2rem);
+            @include transition;
+          }
+        }
+
+        a:hover {
+          @include border;
+          @include color($invert: true);
+
+          span {
+            @include color($invert: true);
+          }
+
+          img {
+            filter: $background-color-filter;
+          }
+        }
+
+        a.active {
+          @include border;
+          @include color($invert: true);
+
+          span {
+            @include color($invert: true);
+          }
+
+          img {
+            filter: $background-color-filter;
+          }
+        }
+      }
+    }
+  }
+}

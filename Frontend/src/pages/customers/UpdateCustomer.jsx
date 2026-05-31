@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Navigate, useLocation } from 'react-router-dom'
 import CustomerForm from '../../components/Customer/CustomerForm'
+import RequiredNote from '../../components/Form/RequiredNote'
 import { MENU_OPTIONS } from '../../components/Menu/Menu'
 import useFetchWithDialog from '../../hooks/useFetchWithDialog'
 import customerFetch from '../../utils/fetch/customer'
@@ -43,9 +44,12 @@ const UpdateCustomer = () => {
       <h2>{strings.CUSTOMER_ACTIONS.update.label}</h2>
 
       {data != null && (
-        <form onSubmit={handleSubmit(submit)}>
-          <CustomerForm register={register} customer={data} />
-        </form>
+        <section className='form'>
+          <RequiredNote />
+          <form onSubmit={handleSubmit(submit)}>
+            <CustomerForm register={register} customer={data} />
+          </form>
+        </section>
       )}
     </>
   )

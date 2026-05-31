@@ -7,7 +7,7 @@ const DeleteSaleForm = ({ register }) => (
     <div>
       <NumberField
         id={strings.CAR_FIELDS.mileage.id}
-        label={strings.CAR_FIELDS.mileage.label}
+        label={`${strings.CAR_FIELDS.mileage.label} realizado`}
         register={register}
       />
     </div>

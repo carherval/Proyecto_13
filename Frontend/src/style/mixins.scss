@@ -1,0 +1,131 @@
+@use './variables.scss' as *;
+
+@mixin flex(
+  $flex-direction: null,
+  $justify-content: center,
+  $align-content: center,
+  $align-items: center,
+  $text-align: center,
+  $flex-wrap: null,
+  $gap: $default-gap
+) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-content: $align-content;
+  align-items: $align-items;
+  text-align: $text-align;
+  flex-wrap: $flex-wrap;
+  gap: $gap;
+}
+
+@mixin width($width: 100%) {
+  width: $width;
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin border($border-width: 0.1rem, $border-color: $front-color) {
+  border: $border-width solid $border-color;
+}
+
+@mixin bordered-box(
+  $border-width: 0.1rem,
+  $border-color: $front-color,
+  $border-radius: 1rem,
+  $padding: 1rem
+) {
+  @include border($border-width, $border-color);
+  border-radius: $border-radius;
+  padding: $padding;
+}
+
+@mixin outline($outline-width: 0.2rem, $outline-color: $black-color) {
+  outline: $outline-width solid $outline-color;
+}
+
+@mixin color(
+  $front: $front-color,
+  $background: $background-color,
+  $invert: false
+) {
+  @if not $invert {
+    color: $front;
+    background-color: $background;
+  } @else {
+    color: $background;
+    background-color: $front;
+  }
+}
+
+@mixin transition(
+  $transition-property: all,
+  $transition-duration: 0.35s,
+  $transition-timing-function: null,
+  $transition-delay: null
+) {
+  transition: $transition-property $transition-duration
+    $transition-timing-function $transition-delay;
+}
+
+@mixin btn(
+  $width: null,
+  $border-radius: 1rem,
+  $padding: 1rem,
+  $font-size: 1.75rem,
+  $transition-property: all,
+  $transition-duration: 0.35s,
+  $transition-timing-function: null,
+  $transition-delay: null
+) {
+  width: $width;
+  border-radius: $border-radius;
+  padding: $padding;
+  font-size: $font-size;
+  @include color($background: $green2-color);
+  cursor: pointer;
+  @include transition(
+    $transition-property,
+    $transition-duration,
+    $transition-timing-function,
+    $transition-delay
+  );
+
+  &:hover {
+    @include color($invert: true);
+  }
+}
+
+@mixin animation(
+  $animation-name,
+  $animation-duration: 1s,
+  $animation-timing-function: linear,
+  $animation-delay: null,
+  $animation-iteration-count: infinite,
+  $animation-direction: null,
+  $animation-fill-mode: null,
+  $animation-play-state: null
+) {
+  animation: $animation-name $animation-duration $animation-timing-function
+    $animation-delay $animation-iteration-count $animation-direction
+    $animation-fill-mode $animation-play-state;
+}
+
+@mixin media-querie($min: null, $max: null) {
+  @if $min and $max {
+    @media (min-width: ($min * 1px)) and (max-width: ($max * 1px)) {
+      @content;
+    }
+  } @else if $min {
+    @media (min-width: ($min * 1px)) {
+      @content;
+    }
+  } @else {
+    @media (max-width: ($max * 1px)) {
+      @content;
+    }
+  }
+}

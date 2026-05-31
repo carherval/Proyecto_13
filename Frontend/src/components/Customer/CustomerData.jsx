@@ -43,39 +43,51 @@ const CustomerData = ({ customer }) => {
 
   return (
     <>
-      <Link
-        to={`/${MENU_OPTIONS.customers.id}/${strings.CUSTOMER_ACTIONS.update.id}`}
-        state={{ id: customer._id }}
-      >
-        {strings.CUSTOMER_ACTIONS.update.label}
-      </Link>
+      <section className='btn-box'>
+        <div>
+          <Link
+            to={`/${MENU_OPTIONS.customers.id}/${strings.CUSTOMER_ACTIONS.update.id}`}
+            state={{ id: customer._id }}
+          >
+            {strings.CUSTOMER_ACTIONS.update.label}
+          </Link>
 
-      {/* No se puede eliminar un cliente con coches reservados o vendidos */}
-      {reservations.length === 0 && sales.length === 0 && (
-        <button
-          type={strings.INPUT_FIELD_TYPES.button}
-          onClick={() =>
-            showConfirmDialog(
-              strings.ACTION_CONFIRM_MSG,
-              handleDeleteCustomerById
-            )
-          }
-        >
-          {strings.CUSTOMER_ACTIONS.delete.label}
-        </button>
-      )}
+          {/* No se puede eliminar un cliente con coches reservados o vendidos */}
+          {reservations.length === 0 && sales.length === 0 && (
+            <button
+              type={strings.INPUT_FIELD_TYPES.button}
+              onClick={() =>
+                showConfirmDialog(
+                  strings.ACTION_CONFIRM_MSG,
+                  handleDeleteCustomerById
+                )
+              }
+            >
+              {strings.CUSTOMER_ACTIONS.delete.label}
+            </button>
+          )}
+        </div>
+      </section>
 
-      <div>
-        {strings.CUSTOMER_USER_FIELDS.surnames.label}: {customer.surnames}
-      </div>
+      <section className='info'>
+        <article>
+          <h3>{helpers.getCustomerFullName(customer, true)}</h3>
 
-      <div>
-        {strings.CUSTOMER_USER_FIELDS.name.label}: {customer.name}
-      </div>
-
-      <div>
-        {strings.CUSTOMER_USER_FIELDS.email.label}: {customer.email}
-      </div>
+          <div className='data'>
+            <div>
+              <div>{strings.CUSTOMER_USER_FIELDS.email.label}</div>
+              <div>
+                <Link
+                  to={`mailto:${customer.email}`}
+                  title={`${strings.CUSTOMER_USER_ACTIONS.email.label} ${helpers.getCustomerFullName(customer, true)}`}
+                >
+                  {customer.email}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
     </>
   )
 }

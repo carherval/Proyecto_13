@@ -12,9 +12,11 @@ const CustomerFilter = React.memo(({ getFilteredCustomers }) => {
   )
 
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      <CustomerFilterForm register={register} />
-    </form>
+    <section className='search'>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <CustomerFilterForm register={register} />
+      </form>
+    </section>
   )
 })
 

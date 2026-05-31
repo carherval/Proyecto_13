@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from '../components/Auth/AuthProvider'
+import RequiredNote from '../components/Form/RequiredNote'
 import TextField from '../components/Form/TextField'
 import useFetchWithDialog from '../hooks/useFetchWithDialog'
 import userFetch from '../utils/fetch/user'
@@ -19,28 +20,31 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
-      <div>
-        <TextField
-          id={strings.USER_FIELDS.username.id}
-          placeholder={strings.USER_FIELDS.username.label}
-          register={register}
-        />
-      </div>
+    <section className='form login'>
+      <RequiredNote />
+      <form onSubmit={handleSubmit(submit)}>
+        <div>
+          <TextField
+            id={strings.USER_FIELDS.username.id}
+            placeholder={strings.USER_FIELDS.username.label}
+            register={register}
+          />
+        </div>
 
-      <div>
-        <TextField
-          id={strings.USER_FIELDS.password.id}
-          type={strings.INPUT_FIELD_TYPES.password}
-          placeholder={strings.USER_FIELDS.password.label}
-          register={register}
-        />
-      </div>
+        <div>
+          <TextField
+            id={strings.USER_FIELDS.password.id}
+            type={strings.INPUT_FIELD_TYPES.password}
+            placeholder={strings.USER_FIELDS.password.label}
+            register={register}
+          />
+        </div>
 
-      <button type={strings.INPUT_FIELD_TYPES.submit}>
-        {strings.USER_ACTIONS.login.label}
-      </button>
-    </form>
+        <button type={strings.INPUT_FIELD_TYPES.submit}>
+          {strings.USER_ACTIONS.login.label}
+        </button>
+      </form>
+    </section>
   )
 }
 

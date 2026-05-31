@@ -1,0 +1,31 @@
+/* Colores */
+$front-color: rgb(28, 75, 86);
+$background-color: rgb(242, 252, 247);
+$green-color: rgb(112, 160, 142);
+$green2-color: rgb(149, 208, 180);
+$white-color: rgb(255, 255, 255);
+$black-color: rgb(0, 0, 0);
+$red-color: rgb(139, 0, 0);
+$blue-color: rgb(0, 120, 215);
+
+$front-color-filter: brightness(0) saturate(100%) invert(24%) sepia(24%)
+  saturate(1030%) hue-rotate(146deg) brightness(95%) contrast(91%);
+$background-color-filter: brightness(0) saturate(100%) invert(98%) sepia(15%)
+  saturate(248%) hue-rotate(79deg) brightness(104%) contrast(98%);
+$green-color-filter: brightness(0) saturate(100%) invert(67%) sepia(14%)
+  saturate(593%) hue-rotate(103deg) brightness(90%) contrast(88%);
+
+/* Resoluciones para "media queries" */
+$mobile-s: 320;
+$mobile-m: 375;
+$mobile-l: 425;
+$tablet: 768;
+$laptop: 1024;
+$laptop-l: 1440;
+$screen-4k: 2560;
+
+/* Otras constantes */
+$header-height: 15.5;
+$default-gap: 2rem;
+$default-border-radius: 2rem;
+$spin-animation-name: spin;

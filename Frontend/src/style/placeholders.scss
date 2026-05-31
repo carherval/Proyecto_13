@@ -1,0 +1,14 @@
+%fully-hidden {
+  display: none;
+}
+
+%visually-hidden {
+  width: 0 !important;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+%bold {
+  font-weight: bold;
+}

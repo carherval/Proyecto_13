@@ -20,19 +20,21 @@ const ReservationSaleFilter = React.memo(({ getFilteredReservationsSales }) => {
   )
 
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      <CarFilterForm register={register} isCarsSection={false} />
-      <CustomerFilterForm register={register} />
+    <section className='search'>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <CarFilterForm register={register} isCarsSection={false} />
+        <CustomerFilterForm register={register} />
 
-      <div>
-        <RadioGroupField
-          id='order'
-          label='Ordenar por'
-          options={strings.RESERVATION_SALE_ORDER_OPTIONS}
-          register={register}
-        />
-      </div>
-    </form>
+        <div>
+          <RadioGroupField
+            id='order'
+            label='Ordenar por'
+            options={strings.RESERVATION_SALE_ORDER_OPTIONS}
+            register={register}
+          />
+        </div>
+      </form>
+    </section>
   )
 })
 
