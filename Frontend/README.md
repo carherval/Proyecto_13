@@ -4,11 +4,19 @@ Aplicación de un concesionario de coches donde los usuarios de dicha aplicació
 
 > Una vez se accede a la aplicación, se puede acceder al perfil del usuario o salir de la aplicación desde el saludo inicial en la cabecera
 
+![](./docs/images/login.png)
+
 ## Coches
 
 Muestra un listado de los coches del concesionario y un buscador para poder filtrar los coches.
 
 Desde esta sección se puede crear un coche (**sólo para usuarios "admin"**).
+
+![](./docs/images/car-list.png)
+
+---
+
+![](./docs/images/create-car.png)
 
 ### Filtrado de coches
 
@@ -34,15 +42,23 @@ Muestra la marca, el modelo y la matrícula, la imagen del coche y una ficha con
 
 Desde esta sección se puede actualizar y eliminar el coche, teniendo en cuenta que:
 
-`Si un coche está disponible sólo se puede actualizar el color, la imagen y el precio`
-`Si un coche no está disponible sólo se puede actualizar la imagen`
-`No se puede eliminar un coche que no está disponible`
+- `Si un coche está disponible sólo se puede actualizar el color, la imagen y el precio`
+- `Si un coche no está disponible sólo se puede actualizar la imagen`
+- `No se puede eliminar un coche que no está disponible`
+
+![](./docs/images/car-info.png)
 
 ## Clientes
 
 Muestra un listado de los clientes del concesionario y un buscador para poder filtrar los clientes.
 
 Desde esta sección se puede crear un cliente.
+
+![](./docs/images/customer-list.png)
+
+---
+
+![](./docs/images/create-customer.png)
 
 ### Filtrado de clientes
 
@@ -60,13 +76,21 @@ Muestra el nombre y los apellidos del cliente y una ficha con la información de
 
 Desde esta sección se puede actualizar y eliminar el cliente, teniendo en cuenta que:
 
-`No se puede eliminar un cliente con coches reservados o vendidos`
+- `No se puede eliminar un cliente con coches reservados o vendidos`
+
+![](./docs/images/customer-info.png)
 
 ## Reservas
 
 Muestra un listado de las reservas de coches del concesionario y un buscador para poder filtrar las reservas.
 
 Desde esta sección se puede reservar un coche.
+
+![](./docs/images/reservation-list.png)
+
+---
+
+![](./docs/images/create-reservation.png)
 
 ### Filtrado de reservas
 
@@ -89,11 +113,19 @@ Muestra una ficha con la información de la misma:
 
 Desde esta sección se puede anular la reserva y vender el coche al cliente que ha hecho la reserva (se anula la reserva).
 
+![](./docs/images/reservation-info.png)
+
 ## Ventas
 
 Muestra un listado de las ventas de coches del concesionario y un buscador para poder filtrar las ventas.
 
 Desde esta sección se puede vender un coche.
+
+![](./docs/images/sale-list.png)
+
+---
+
+![](./docs/images/create-sale.png)
 
 ### Filtrado de ventas
 
@@ -116,6 +148,8 @@ Muestra una ficha con la información de la misma:
 
 Desde esta sección se puede devolver el coche en donde hay que añadir el kilometraje realizado.
 
+![](./docs/images/sale-info.png)
+
 ## Usuarios
 
 > La sección "Usuarios" sólo es visible para usuarios "admin"
@@ -123,6 +157,12 @@ Desde esta sección se puede devolver el coche en donde hay que añadir el kilom
 Muestra un listado de los usuarios de la aplicación del concesionario y un buscador para poder filtrar los usuarios.
 
 Desde esta sección se puede crear un usuario.
+
+![](./docs/images/user-list.png)
+
+---
+
+![](./docs/images/create-user.png)
 
 ### Filtrado de usuarios
 
@@ -143,7 +183,9 @@ Muestra el nombre y los apellidos del usuario y una ficha con la información de
 
 Desde esta sección se puede actualizar los datos y actualizar la contraseña del usuario, teniendo en cuenta que:
 
-`Un usuario que no sea "admin" sólo puede consultar y actualizar su propio usuario mediante el enlace al perfil del usuario en el saludo inicial de la cabecera de la aplicación`
-`El usuario "superadmin" no se puede actualizar ni eliminar`
-`El rol sólo puede ser actualizado por un usuario "admin"`
-`Un usuario no se puede eliminar a sí mismo`
+- `Un usuario que no sea "admin" sólo puede consultar y actualizar su propio usuario mediante el enlace al perfil del usuario en el saludo inicial de la cabecera de la aplicación`
+- `El usuario "superadmin" no se puede actualizar ni eliminar`
+- `El rol sólo puede ser actualizado por un usuario "admin"`
+- `Un usuario no se puede eliminar a sí mismo`
+
+![](./docs/images/user-info.png)
