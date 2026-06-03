@@ -12,10 +12,10 @@ A continuación se detallan los datos que almacena un coche de la colección **_
 | ------------------ | -------------------------------- | ------------- | ----------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **\__id_**         | Identificador del coche          | Identificador | ---         | Sí    | **Automático**                                                                                                                                                                                                                |
 | **_licensePlate_** | Matrícula del coche              | Texto         | Sí          | Sí    | Matrícula válida en formato de 4 dígitos y 3 consonantes, excluyendo la Ñ                                                                                                                                                     |
-| **_make_**         | Marca del coche                  | Texto         | Sí          | No    | Marca válida [1]                                                                                                                                                                                                              |
-| **_model_**        | Modelo del coche                 | Texto         | Sí          | No    | Modelo válido [2]                                                                                                                                                                                                             |
+| **_make_**         | Marca del coche                  | Texto         | Sí          | No    | Marca válida [1](#marcas-y-modelos-válidos)                                                                                                                                                                                   |
+| **_model_**        | Modelo del coche                 | Texto         | Sí          | No    | Modelo válido [2](#marcas-y-modelos-válidos)                                                                                                                                                                                  |
 | **_color_**        | Color del coche                  | Texto         | Sí          | No    | _Amarillo, Azul, Azul metálico, Azul oscuro, Blanco, Dorado, Granate, Gris, Gris azulado, Gris oscuro, Marrón, Marrón oscuro, Morado, Mostaza, Naranja, Negro, Oliva, Plateado, Rojo, Turquesa, Verde, Verde oscuro, Violeta_ |
-| **_img_**          | Imagen del coche                 | Texto         | No          | Sí    | Ruta del archivo subido a **Cloudinary** [3]                                                                                                                                                                                  |
+| **_img_**          | Imagen del coche                 | Texto         | No          | Sí    | Ruta del archivo subido a **Cloudinary** [3](#extensiones-y-tamaños-válidos)                                                                                                                                                  |
 | **_modelYear_**    | Año de fabricación del coche     | Número        | Sí          | No    | Año válido (entre 2000 y el año actual) en formato _AAAA_                                                                                                                                                                     |
 | **_purchaseDate_** | Fecha de adquisición del coche   | Fecha         | Sí          | No    | Fecha válida (año entre el año de fabricación del coche y el año actual) en formato _DD/MM/AAAA_                                                                                                                              |
 | **_condition_**    | Condición del coche              | Texto         | Sí          | No    | _Nuevo, Usado_                                                                                                                                                                                                                |
@@ -26,8 +26,7 @@ A continuación se detallan los datos que almacena un coche de la colección **_
 | **_createdAt_**    | Fecha de creación del coche      | Fecha         | ---         | No    | **Automático**                                                                                                                                                                                                                |
 | **_updatedAt_**    | Fecha de actualización del coche | Fecha         | ---         | No    | **Automático**                                                                                                                                                                                                                |
 
-[1]:
-[2]:
+### Marcas y modelos válidos
 
 - Acura: MDX, RDX
 - Audi: A4, Q5, Q7
@@ -58,10 +57,14 @@ A continuación se detallan los datos que almacena un coche de la colección **_
 - Volkswagen: Golf, Passat, Tiguan
 - Volvo: S40, S60, XC60, XC90
 
-[3]:
+[↑ Volver a **Colección _car_**](#colección-car)
+
+### Extensiones y tamaños válidos
 
 - Extensión: jpg, jpeg, png, gif, webp
 - Tamaño: menor o igual que 5 MB
+
+[↑ Volver a **Colección _car_**](#colección-car)
 
 ## Colección _customer_
 
@@ -124,19 +127,19 @@ Si se desea, se puede ejecutar **previamente** una carga inicial de datos en las
 npm run createData
 ```
 
-`La carga inicial elimina todos los datos almacenados previamente en las colecciones "car", "customer", "reservation" y "sale" y elimina los archivos de las imágenes de los coches subidos a "Cloudinary"`
+- `La carga inicial elimina todos los datos almacenados previamente en las colecciones "car", "customer", "reservation" y "sale" y elimina los archivos de las imágenes de los coches subidos a "Cloudinary"`
 
 ## Endpoints de la colección _car_
 
 A continuación se detallan las peticiones **HTTP** de la **API** de la colección **_car_** y sus posibles respuestas:
 
-| MÉTODO | URL                                  | DESCRIPCIÓN                  | LOGIN        | PARÁMETROS              | CUERPO DE LA PETICIÓN                                         | CÓDIGO DE RESPUESTA | RESPUESTA                                                                 |
-| ------ | ------------------------------------ | ---------------------------- | ------------ | ----------------------- | ------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------- |
-| GET    | http://localhost:3000/car/get/all/   | Búsqueda de todos los coches | **_seller_** |                         |                                                               | 200                 | Lista de todos los coches ordenados por marca y modelo                    |
-| GET    | http://localhost:3000/car/get/id/    | Búsqueda de un coche         | **_seller_** | Identificador del coche |                                                               | 200                 | Coche                                                                     |
-| POST   | http://localhost:3000/car/create/    | Creación de un coche         | **_admin_**  |                         | **Multipart Form Data** con los campos del coche a crear      | 201                 | Coche creado y mensaje de confirmación de la creación del coche           |
-| PUT    | http://localhost:3000/car/update/id/ | Actualización de un coche    | **_admin_**  | Identificador del coche | **Multipart Form Data** con los campos a actualizar del coche | 200                 | Coche actualizado y mensaje de confirmación de la actualización del coche |
-| DEL    | http://localhost:3000/car/delete/id/ | Eliminación de un coche      | **_admin_**  | Identificador del coche |                                                               | 200                 | Mensaje de confirmación de la eliminación del coche                       |
+| MÉTODO | URL                                                         | DESCRIPCIÓN                  | LOGIN        | PARÁMETROS              | CUERPO DE LA PETICIÓN                                         | CÓDIGO DE RESPUESTA | RESPUESTA                                                                 |
+| ------ | ----------------------------------------------------------- | ---------------------------- | ------------ | ----------------------- | ------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------- |
+| GET    | https://thepower-car-dealership.onrender.com/car/get/all/   | Búsqueda de todos los coches | **_seller_** |                         |                                                               | 200                 | Lista de todos los coches ordenados por marca y modelo                    |
+| GET    | https://thepower-car-dealership.onrender.com/car/get/id/    | Búsqueda de un coche         | **_seller_** | Identificador del coche |                                                               | 200                 | Coche                                                                     |
+| POST   | https://thepower-car-dealership.onrender.com/car/create/    | Creación de un coche         | **_admin_**  |                         | **Multipart Form Data** con los campos del coche a crear      | 201                 | Coche creado y mensaje de confirmación de la creación del coche           |
+| PUT    | https://thepower-car-dealership.onrender.com/car/update/id/ | Actualización de un coche    | **_admin_**  | Identificador del coche | **Multipart Form Data** con los campos a actualizar del coche | 200                 | Coche actualizado y mensaje de confirmación de la actualización del coche |
+| DEL    | https://thepower-car-dealership.onrender.com/car/delete/id/ | Eliminación de un coche      | **_admin_**  | Identificador del coche |                                                               | 200                 | Mensaje de confirmación de la eliminación del coche                       |
 
 - El código de respuesta también puede ser **400** cuando falla la subida de la imagen del coche a **Cloudinary**
 - El código de respuesta también puede ser **403** cuando se intenta realizar una acción sin estar autorizado
@@ -145,30 +148,31 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 - El código de respuesta también puede ser **422** cuando se produce un error durante la validación de los datos
 - El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición
 
-`Si se crea un coche con la condición "Nuevo" el kilometraje siempre es 0`
-`Si se crea un coche con la condición "Usado" el kilometraje tiene que ser mayor que 0`
-`Un coche siempre se crea con el estado "Disponible"`
-`Si un coche está disponible sólo se puede actualizar el color, la imagen y el precio`
-`Si un coche no está disponible sólo se puede actualizar la imagen`
-`No se puede eliminar un coche que no está disponible`
-`La imagen de un coche será eliminada de "Cloudinary" si se produce alguna de las siguientes situaciones:`
+---
 
-- `Se ha producido un error al crear el coche`
-- `Se actualiza la imagen del coche por una nueva`
-- `Se ha producido un error al actualizar el coche`
-- `Se elimina el coche`
+- `Si se crea un coche con la condición "Nuevo" el kilometraje siempre es 0`
+- `Si se crea un coche con la condición "Usado" el kilometraje tiene que ser mayor que 0`
+- `Un coche siempre se crea con el estado "Disponible"`
+- `Si un coche está disponible sólo se puede actualizar el color, la imagen y el precio`
+- `Si un coche no está disponible sólo se puede actualizar la imagen`
+- `No se puede eliminar un coche que no está disponible`
+- `La imagen de un coche será eliminada de "Cloudinary" si se produce alguna de las siguientes situaciones:`
+  - `Se ha producido un error al crear el coche`
+  - `Se actualiza la imagen del coche por una nueva`
+  - `Se ha producido un error al actualizar el coche`
+  - `Se elimina el coche`
 
 ## Endpoints de la colección _customer_
 
 A continuación se detallan las peticiones **HTTP** de la **API** de la colección **_customer_** y sus posibles respuestas:
 
-| MÉTODO | URL                                       | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                | CUERPO DE LA PETICIÓN                                           | CÓDIGO DE RESPUESTA | RESPUESTA                                                                     |
-| ------ | ----------------------------------------- | ------------------------------ | ------------ | ------------------------- | --------------------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------- |
-| GET    | http://localhost:3000/customer/get/all/   | Búsqueda de todos los clientes | **_seller_** |                           |                                                                 | 200                 | Lista de todos los clientes ordenados por apellidos y nombre                  |
-| GET    | http://localhost:3000/customer/get/id/    | Búsqueda de un cliente         | **_seller_** | Identificador del cliente |                                                                 | 200                 | Cliente                                                                       |
-| POST   | http://localhost:3000/customer/create/    | Creación de un cliente         | **_seller_** |                           | **Multipart Form Data** con los campos del cliente a crear      | 201                 | Cliente creado y mensaje de confirmación de la creación del cliente           |
-| PUT    | http://localhost:3000/customer/update/id/ | Actualización de un cliente    | **_seller_** | Identificador del cliente | **Multipart Form Data** con los campos a actualizar del cliente | 200                 | Cliente actualizado y mensaje de confirmación de la actualización del cliente |
-| DEL    | http://localhost:3000/customer/delete/id/ | Eliminación de un cliente      | **_seller_** | Identificador del cliente |                                                                 | 200                 | Mensaje de confirmación de la eliminación del cliente                         |
+| MÉTODO | URL                                                              | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                | CUERPO DE LA PETICIÓN                                           | CÓDIGO DE RESPUESTA | RESPUESTA                                                                     |
+| ------ | ---------------------------------------------------------------- | ------------------------------ | ------------ | ------------------------- | --------------------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------- |
+| GET    | https://thepower-car-dealership.onrender.com/customer/get/all/   | Búsqueda de todos los clientes | **_seller_** |                           |                                                                 | 200                 | Lista de todos los clientes ordenados por apellidos y nombre                  |
+| GET    | https://thepower-car-dealership.onrender.com/customer/get/id/    | Búsqueda de un cliente         | **_seller_** | Identificador del cliente |                                                                 | 200                 | Cliente                                                                       |
+| POST   | https://thepower-car-dealership.onrender.com/customer/create/    | Creación de un cliente         | **_seller_** |                           | **Multipart Form Data** con los campos del cliente a crear      | 201                 | Cliente creado y mensaje de confirmación de la creación del cliente           |
+| PUT    | https://thepower-car-dealership.onrender.com/customer/update/id/ | Actualización de un cliente    | **_seller_** | Identificador del cliente | **Multipart Form Data** con los campos a actualizar del cliente | 200                 | Cliente actualizado y mensaje de confirmación de la actualización del cliente |
+| DEL    | https://thepower-car-dealership.onrender.com/customer/delete/id/ | Eliminación de un cliente      | **_seller_** | Identificador del cliente |                                                                 | 200                 | Mensaje de confirmación de la eliminación del cliente                         |
 
 - El código de respuesta también puede ser **400** cuando falla la subida del cliente
 - El código de respuesta también puede ser **403** cuando se intenta realizar una acción sin estar autorizado
@@ -176,20 +180,22 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 - El código de respuesta también puede ser **422** cuando se produce un error durante la validación de los datos
 - El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición
 
-`No se puede eliminar un cliente con coches reservados o vendidos`
+---
+
+- `No se puede eliminar un cliente con coches reservados o vendidos`
 
 ## Endpoints de la colección _reservation_
 
 A continuación se detallan las peticiones **HTTP** de la **API** de la colección **_reservation_** y sus posibles respuestas:
 
-| MÉTODO | URL                                                | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                              | CUERPO DE LA PETICIÓN                                        | CÓDIGO DE RESPUESTA | RESPUESTA                                                                                                      |
-| ------ | -------------------------------------------------- | ------------------------------ | ------------ | --------------------------------------- | ------------------------------------------------------------ | ------------------- | -------------------------------------------------------------------------------------------------------------- |
-| GET    | http://localhost:3000/reservation/get/all/         | Búsqueda de todas las reservas | **_seller_** |                                         |                                                              | 200                 | Lista de todas las reservas ordenadas descendentemente por fecha de la reserva                                 |
-| GET    | http://localhost:3000/reservation/get/id/          | Búsqueda de una reserva        | **_seller_** | Identificador de la reserva             |                                                              | 200                 | Reserva                                                                                                        |
-| GET    | http://localhost:3000/reservation/get/car-id/      | Búsqueda de una reserva        | **_seller_** | Identificador del coche de la reserva   |                                                              | 200                 | Reserva                                                                                                        |
-| GET    | http://localhost:3000/reservation/get/customer-id/ | Búsqueda filtrada              | **_seller_** | Identificador del cliente de la reserva |                                                              | 200                 | Lista de reservas filtradas por identificador del cliente y ordenadas descendentemente por fecha de la reserva |
-| POST   | http://localhost:3000/reservation/create/          | Reserva de un coche            | **_seller_** |                                         | **Multipart Form Data** con los campos de la reserva a crear | 201                 | Reserva del coche, coche actualizado y mensaje de confirmación de la reserva del coche                         |
-| DEL    | http://localhost:3000/reservation/delete/id/       | Anulación de una reserva       | **_seller_** | Identificador de la reserva             |                                                              | 200                 | Coche actualizado y mensaje de confirmación de la anulación de la reserva                                      |
+| MÉTODO | URL                                                                       | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                              | CUERPO DE LA PETICIÓN                                        | CÓDIGO DE RESPUESTA | RESPUESTA                                                                                                      |
+| ------ | ------------------------------------------------------------------------- | ------------------------------ | ------------ | --------------------------------------- | ------------------------------------------------------------ | ------------------- | -------------------------------------------------------------------------------------------------------------- |
+| GET    | https://thepower-car-dealership.onrender.com/reservation/get/all/         | Búsqueda de todas las reservas | **_seller_** |                                         |                                                              | 200                 | Lista de todas las reservas ordenadas descendentemente por fecha de la reserva                                 |
+| GET    | https://thepower-car-dealership.onrender.com/reservation/get/id/          | Búsqueda de una reserva        | **_seller_** | Identificador de la reserva             |                                                              | 200                 | Reserva                                                                                                        |
+| GET    | https://thepower-car-dealership.onrender.com/reservation/get/car-id/      | Búsqueda de una reserva        | **_seller_** | Identificador del coche de la reserva   |                                                              | 200                 | Reserva                                                                                                        |
+| GET    | https://thepower-car-dealership.onrender.com/reservation/get/customer-id/ | Búsqueda filtrada              | **_seller_** | Identificador del cliente de la reserva |                                                              | 200                 | Lista de reservas filtradas por identificador del cliente y ordenadas descendentemente por fecha de la reserva |
+| POST   | https://thepower-car-dealership.onrender.com/reservation/create/          | Reserva de un coche            | **_seller_** |                                         | **Multipart Form Data** con los campos de la reserva a crear | 201                 | Reserva del coche, coche actualizado y mensaje de confirmación de la reserva del coche                         |
+| DEL    | https://thepower-car-dealership.onrender.com/reservation/delete/id/       | Anulación de una reserva       | **_seller_** | Identificador de la reserva             |                                                              | 200                 | Coche actualizado y mensaje de confirmación de la anulación de la reserva                                      |
 
 - El código de respuesta también puede ser **400** cuando falla la subida de la reserva
 - El código de respuesta también puede ser **403** cuando se intenta realizar una acción sin estar autorizado
@@ -199,21 +205,21 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 
 > La información de una reserva se puebla con la información del coche y del cliente de dicha reserva
 
-`No se puede reservar un coche que ya está reservado o vendido`
-`Cuando se reserva un coche o se anula una reserva se actualiza el estado del coche`
+- `No se puede reservar un coche que ya está reservado o vendido`
+- `Cuando se reserva un coche o se anula una reserva se actualiza el estado del coche`
 
 ## Endpoints de la colección _sale_
 
 A continuación se detallan las peticiones **HTTP** de la **API** de la colección **_sale_** y sus posibles respuestas:
 
-| MÉTODO | URL                                         | DESCRIPCIÓN                  | LOGIN        | PARÁMETROS                            | CUERPO DE LA PETICIÓN                                      | CÓDIGO DE RESPUESTA | RESPUESTA                                                                                                  |
-| ------ | ------------------------------------------- | ---------------------------- | ------------ | ------------------------------------- | ---------------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------- |
-| GET    | http://localhost:3000/sale/get/all/         | Búsqueda de todas las ventas | **_seller_** |                                       |                                                            | 200                 | Lista de todas las ventas ordenadas descendentemente por fecha de la venta                                 |
-| GET    | http://localhost:3000/sale/get/id/          | Búsqueda de una venta        | **_seller_** | Identificador de la venta             |                                                            | 200                 | Venta                                                                                                      |
-| GET    | http://localhost:3000/sale/get/car-id/      | Búsqueda de una venta        | **_seller_** | Identificador del coche de la venta   |                                                            | 200                 | Venta                                                                                                      |
-| GET    | http://localhost:3000/sale/get/customer-id/ | Búsqueda filtrada            | **_seller_** | Identificador del cliente de la venta |                                                            | 200                 | Lista de ventas filtradas por identificador del cliente y ordenadas descendentemente por fecha de la venta |
-| POST   | http://localhost:3000/sale/create/          | Venta de un coche            | **_seller_** |                                       | **Multipart Form Data** con los campos de la venta a crear | 201                 | Venta del coche, coche actualizado y mensaje de confirmación de la venta del coche                         |
-| DEL    | http://localhost:3000/sale/delete/id/       | Devolución de un coche       | **_seller_** | Identificador de la venta             |                                                            | 200                 | Coche actualizado y mensaje de confirmación de la devolución del coche                                     |
+| MÉTODO | URL                                                                | DESCRIPCIÓN                  | LOGIN        | PARÁMETROS                            | CUERPO DE LA PETICIÓN                                      | CÓDIGO DE RESPUESTA | RESPUESTA                                                                                                  |
+| ------ | ------------------------------------------------------------------ | ---------------------------- | ------------ | ------------------------------------- | ---------------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------- |
+| GET    | https://thepower-car-dealership.onrender.com/sale/get/all/         | Búsqueda de todas las ventas | **_seller_** |                                       |                                                            | 200                 | Lista de todas las ventas ordenadas descendentemente por fecha de la venta                                 |
+| GET    | https://thepower-car-dealership.onrender.com/sale/get/id/          | Búsqueda de una venta        | **_seller_** | Identificador de la venta             |                                                            | 200                 | Venta                                                                                                      |
+| GET    | https://thepower-car-dealership.onrender.com/sale/get/car-id/      | Búsqueda de una venta        | **_seller_** | Identificador del coche de la venta   |                                                            | 200                 | Venta                                                                                                      |
+| GET    | https://thepower-car-dealership.onrender.com/sale/get/customer-id/ | Búsqueda filtrada            | **_seller_** | Identificador del cliente de la venta |                                                            | 200                 | Lista de ventas filtradas por identificador del cliente y ordenadas descendentemente por fecha de la venta |
+| POST   | https://thepower-car-dealership.onrender.com/sale/create/          | Venta de un coche            | **_seller_** |                                       | **Multipart Form Data** con los campos de la venta a crear | 201                 | Venta del coche, coche actualizado y mensaje de confirmación de la venta del coche                         |
+| DEL    | https://thepower-car-dealership.onrender.com/sale/delete/id/       | Devolución de un coche       | **_seller_** | Identificador de la venta             |                                                            | 200                 | Coche actualizado y mensaje de confirmación de la devolución del coche                                     |
 
 - El código de respuesta también puede ser **400** cuando falla la subida de la venta
 - El código de respuesta también puede ser **403** cuando se intenta realizar una acción sin estar autorizado
@@ -223,24 +229,24 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 
 > La información de una venta se puebla con la información del coche y del cliente de dicha venta
 
-`No se puede vender un coche que ya está vendido`
-`No se puede vender a un cliente un coche reservado a otro cliente`
-`Si se vende un coche reservado se anula la reserva`
-`Cuando se vende un coche se actualiza el estado del coche`
-`Cuando se devuelve un coche se actualiza la condición, el kilometraje (hay que añadir el kilometraje realizado) y el estado del coche`
+- `No se puede vender un coche que ya está vendido`
+- `No se puede vender a un cliente un coche reservado a otro cliente`
+- `Si se vende un coche reservado se anula la reserva`
+- `Cuando se vende un coche se actualiza el estado del coche`
+- `Cuando se devuelve un coche se actualiza la condición, el kilometraje (hay que añadir el kilometraje realizado) y el estado del coche`
 
 ## Endpoints de la colección _user_
 
 A continuación se detallan las peticiones **HTTP** de la **API** de la colección **_user_** y sus posibles respuestas:
 
-| MÉTODO | URL                                   | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                | CUERPO DE LA PETICIÓN                                                                         | CÓDIGO DE RESPUESTA | RESPUESTA                                                                                                                      |
-| ------ | ------------------------------------- | ------------------------------ | ------------ | ------------------------- | --------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| GET    | http://localhost:3000/user/get/all/   | Búsqueda de todos los usuarios | **_admin_**  |                           |                                                                                               | 200                 | Lista de todos los usuarios ordenados por nombre de usuario                                                                    |
-| GET    | http://localhost:3000/user/get/id/    | Búsqueda de un usuario         | **_seller_** | Identificador del usuario |                                                                                               | 200                 | Usuario                                                                                                                        |
-| POST   | http://localhost:3000/user/login/     | Inicio de sesión de un usuario | ---          |                           | **Multipart Form Data** con el nombre de usuario y la contraseña del usuario a iniciar sesión | 200                 | Token de autorización generado, fecha de expiración del token e identificador, nombre y rol del usuario que ha iniciado sesión |
-| POST   | http://localhost:3000/user/create/    | Creación de un usuario         | **_admin_**  |                           | **Multipart Form Data** con los campos del usuario a crear                                    | 201                 | Usuario creado y mensaje de confirmación de la creación del usuario                                                            |
-| PUT    | http://localhost:3000/user/update/id/ | Actualización de un usuario    | **_seller_** | Identificador del usuario | **Multipart Form Data** con los campos a actualizar del usuario                               | 200                 | Usuario actualizado y mensaje de confirmación de la actualización del usuario                                                  |
-| DEL    | http://localhost:3000/user/delete/id/ | Eliminación de un usuario      | **_admin_**  | Identificador del usuario |                                                                                               | 200                 | Mensaje de confirmación de la eliminación del usuario                                                                          |
+| MÉTODO | URL                                                          | DESCRIPCIÓN                    | LOGIN        | PARÁMETROS                | CUERPO DE LA PETICIÓN                                                                         | CÓDIGO DE RESPUESTA | RESPUESTA                                                                                                                      |
+| ------ | ------------------------------------------------------------ | ------------------------------ | ------------ | ------------------------- | --------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| GET    | https://thepower-car-dealership.onrender.com/user/get/all/   | Búsqueda de todos los usuarios | **_admin_**  |                           |                                                                                               | 200                 | Lista de todos los usuarios ordenados por nombre de usuario                                                                    |
+| GET    | https://thepower-car-dealership.onrender.com/user/get/id/    | Búsqueda de un usuario         | **_seller_** | Identificador del usuario |                                                                                               | 200                 | Usuario                                                                                                                        |
+| POST   | https://thepower-car-dealership.onrender.com/user/login/     | Inicio de sesión de un usuario | ---          |                           | **Multipart Form Data** con el nombre de usuario y la contraseña del usuario a iniciar sesión | 200                 | Token de autorización generado, fecha de expiración del token e identificador, nombre y rol del usuario que ha iniciado sesión |
+| POST   | https://thepower-car-dealership.onrender.com/user/create/    | Creación de un usuario         | **_admin_**  |                           | **Multipart Form Data** con los campos del usuario a crear                                    | 201                 | Usuario creado y mensaje de confirmación de la creación del usuario                                                            |
+| PUT    | https://thepower-car-dealership.onrender.com/user/update/id/ | Actualización de un usuario    | **_seller_** | Identificador del usuario | **Multipart Form Data** con los campos a actualizar del usuario                               | 200                 | Usuario actualizado y mensaje de confirmación de la actualización del usuario                                                  |
+| DEL    | https://thepower-car-dealership.onrender.com/user/delete/id/ | Eliminación de un usuario      | **_admin_**  | Identificador del usuario |                                                                                               | 200                 | Mensaje de confirmación de la eliminación del usuario                                                                          |
 
 - El código de respuesta también puede ser **400** cuando falla la subida del usuario
 - El código de respuesta también puede ser **401** cuando falla el inicio de sesión del usuario
@@ -249,10 +255,12 @@ A continuación se detallan las peticiones **HTTP** de la **API** de la colecci�
 - El código de respuesta también puede ser **422** cuando se produce un error durante la validación de los datos
 - El código de respuesta también puede ser **500** cuando se produce un error interno del servidor al procesar la petición
 
-`Un usuario que no sea "admin" sólo puede consultar y actualizar su propio usuario`
-`El usuario "superadmin" no se puede actualizar ni eliminar`
-`El rol sólo puede ser actualizado por un usuario "admin"`
-`Un usuario no se puede eliminar a sí mismo`
+---
+
+- `Un usuario que no sea "admin" sólo puede consultar y actualizar su propio usuario`
+- `El usuario "superadmin" no se puede actualizar ni eliminar`
+- `El rol sólo puede ser actualizado por un usuario "admin"`
+- `Un usuario no se puede eliminar a sí mismo`
 
 [//]: # 'Lista de enlaces:'
 [Cloudinary]: https://cloudinary.com/
