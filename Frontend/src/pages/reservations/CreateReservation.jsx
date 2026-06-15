@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import RequiredNote from '../../components/Form/RequiredNote'
+import { MENU_OPTIONS } from '../../components/Menu/Menu'
 import ReservationSaleForm from '../../components/ReservationSale/ReservationSaleForm'
 import useDialog from '../../hooks/useDialog'
 import useFetchWithDialog from '../../hooks/useFetchWithDialog'
@@ -27,14 +28,14 @@ const CreateReservation = () => {
   const { showAlertDialog } = useDialog()
   const navigate = useNavigate()
 
-  const submit = async (body) => {
-    const res = await createReservation(body)
-
-    if (res.ok) {
-      // Se recarga la página para actualizar la selección de coches disponibles
-      showAlertDialog(res.resData.msg, () => helpers.selfNavigate(navigate))
-    }
-  }
+  const submit = async (body) =>
+    helpers.handleAction(
+      createReservation,
+      showAlertDialog,
+      navigate,
+      `/${MENU_OPTIONS.reservations.id}`,
+      body
+    )
 
   // Inicialmente, se obtienen los coches y los clientes
   useEffect(() => {
