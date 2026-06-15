@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import strings from './strings'
 
 // Minutos
-const EXPIRATION_TIME = 15
+const EXPIRATION_TIME = 30
 
 const MIN_YEAR = 2000
 const MIN_PRICE = 1

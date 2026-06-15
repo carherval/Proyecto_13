@@ -2,7 +2,7 @@ const dotenv = require('dotenv')
 const jsonwebtoken = require('jsonwebtoken')
 
 // Minutos
-const EXPIRATION_TIME = 15
+const EXPIRATION_TIME = 30
 
 // Se suprimen "logs" innecesarios
 dotenv.config({ quiet: true })
