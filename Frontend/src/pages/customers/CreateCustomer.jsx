@@ -7,7 +7,7 @@ import strings from '../../utils/strings'
 
 // Componente que permite crear un cliente nuevo
 const CreateCustomer = () => {
-  const { register, handleSubmit } = useForm()
+  const { register, reset, handleSubmit } = useForm()
   const { fetchData } = useFetchWithDialog(customerFetch.createCustomer)
 
   const submit = (body) => fetchData(body)
@@ -19,7 +19,7 @@ const CreateCustomer = () => {
       <section className='form'>
         <RequiredNote />
         <form onSubmit={handleSubmit(submit)}>
-          <CustomerForm register={register} />
+          <CustomerForm register={register} reset={reset} />
         </form>
       </section>
     </>

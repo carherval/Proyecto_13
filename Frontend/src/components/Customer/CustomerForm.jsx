@@ -1,8 +1,9 @@
+import ResetButton from '../Form/ResetButton'
 import TextField from '../Form/TextField'
 import strings from '../../utils/strings'
 
 // Componente que devuelve los campos para la creación o actualización de un cliente
-const CustomerForm = ({ register, customer }) => (
+const CustomerForm = ({ register, reset, customer }) => (
   <>
     <div>
       <TextField
@@ -27,6 +28,8 @@ const CustomerForm = ({ register, customer }) => (
         register={register}
       />
     </div>
+
+    {reset != null && <ResetButton reset={reset} />}
 
     <button type={strings.INPUT_FIELD_TYPES.submit}>
       {customer == null

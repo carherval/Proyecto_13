@@ -15,7 +15,7 @@ const DEFAULT_CREATE_CAR_FORM_VALUES = {
 
 // Componente que permite crear un coche nuevo
 const CreateCar = () => {
-  const { register, control, watch, handleSubmit } = useForm({
+  const { register, control, watch, reset, handleSubmit } = useForm({
     defaultValues: DEFAULT_CREATE_CAR_FORM_VALUES,
     shouldUnregister: true
   })
@@ -30,7 +30,12 @@ const CreateCar = () => {
       <section className='form'>
         <RequiredNote />
         <form onSubmit={handleSubmit(submit)}>
-          <CarForm register={register} control={control} watch={watch} />
+          <CarForm
+            register={register}
+            control={control}
+            watch={watch}
+            reset={reset}
+          />
         </form>
       </section>
     </>

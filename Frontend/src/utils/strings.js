@@ -187,6 +187,10 @@ const USER_ACTIONS = {
   delete: { id: 'delete', label: 'Eliminar usuario' }
 }
 
+const COMMON_ACTIONS = {
+  reset: { id: 'reset', label: 'Limpiar formulario' }
+}
+
 const CAR_CONDITION_FILTER_OPTIONS = {
   allConditions: { id: 'allConditions', value: FILTER_ALL_OPTION },
   new: { id: 'new', value: CAR_CONDITIONS.new },
@@ -253,6 +257,7 @@ const strings = {
   SALE_ACTIONS,
   USER_FIELDS,
   USER_ACTIONS,
+  COMMON_ACTIONS,
   CAR_CONDITION_FILTER_OPTIONS,
   CAR_STATUS_FILTER_OPTIONS,
   RESERVATION_SALE_ORDER_OPTIONS,

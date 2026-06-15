@@ -11,7 +11,7 @@ const DEFAULT_CREATE_USER_FORM_VALUES = {
 
 // Componente que permite crear un usuario nuevo
 const CreateUser = () => {
-  const { register, handleSubmit } = useForm({
+  const { register, reset, handleSubmit } = useForm({
     defaultValues: DEFAULT_CREATE_USER_FORM_VALUES
   })
   const { fetchData } = useFetchWithDialog(userFetch.createUser)
@@ -25,7 +25,7 @@ const CreateUser = () => {
       <section className='form'>
         <RequiredNote />
         <form onSubmit={handleSubmit(submit)}>
-          <UserForm register={register} />
+          <UserForm register={register} reset={reset} />
         </form>
       </section>
     </>

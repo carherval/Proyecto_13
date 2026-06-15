@@ -1,12 +1,13 @@
 import DateField from '../Form/DateField'
 import FileField from '../Form/FileField'
 import NumberField from '../Form/NumberField'
+import ResetButton from '../Form/ResetButton'
 import SelectField from '../Form/SelectField'
 import TextField from '../Form/TextField'
 import strings from '../../utils/strings'
 
 // Componente que devuelve los campos para la creación o actualización de un coche
-const CarForm = ({ register, control, watch, car }) => {
+const CarForm = ({ register, control, watch, reset, car }) => {
   const [make, img, condition] = watch([
     strings.CAR_FIELDS.make.id,
     strings.CAR_FIELDS.img.id,
@@ -123,6 +124,8 @@ const CarForm = ({ register, control, watch, car }) => {
           />
         </div>
       )}
+
+      {reset != null && <ResetButton reset={reset} />}
 
       <button type={strings.INPUT_FIELD_TYPES.submit}>
         {car == null

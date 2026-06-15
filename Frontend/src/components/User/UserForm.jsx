@@ -1,12 +1,13 @@
 import { useContext } from 'react'
 import { AuthContext } from '../Auth/AuthProvider'
+import ResetButton from '../Form/ResetButton'
 import SelectField from '../Form/SelectField'
 import TextField from '../Form/TextField'
 import helpers from '../../utils/helpers'
 import strings from '../../utils/strings'
 
 // Componente que devuelve los campos para la creación o actualización de un usuario
-const UserForm = ({ register, action }) => {
+const UserForm = ({ register, reset, action }) => {
   const { user } = useContext(AuthContext)
 
   return (
@@ -74,6 +75,8 @@ const UserForm = ({ register, action }) => {
           )}
         </>
       )}
+
+      {reset != null && <ResetButton reset={reset} />}
 
       <button type={strings.INPUT_FIELD_TYPES.submit}>
         {action == null
