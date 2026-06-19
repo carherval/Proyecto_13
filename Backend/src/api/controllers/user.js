@@ -194,7 +194,7 @@ const updateUserById = async (req, res, next) => {
 
     await updatedUser.save()
 
-    const { userPassword, ...updatedUserWithoutPassword } =
+    const { password: userPassword, ...updatedUserWithoutPassword } =
       updatedUser.toObject()
 
     return res.status(200).json({
